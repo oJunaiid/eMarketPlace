@@ -59,6 +59,8 @@ class HomeController: UIViewController, UIScrollViewDelegate {
         
         // Add table view to main view
         view.addSubview(tableView)
+        
+        
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
