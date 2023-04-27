@@ -1,0 +1,511 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		071D4DEF29E6906C004AFDA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4DEE29E6906C004AFDA4 /* AppDelegate.swift */; };
+		071D4DF129E6906C004AFDA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4DF029E6906C004AFDA4 /* SceneDelegate.swift */; };
+		071D4DF329E6906C004AFDA4 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4DF229E6906C004AFDA4 /* HomeController.swift */; };
+		071D4DF629E6906C004AFDA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 071D4DF429E6906C004AFDA4 /* Main.storyboard */; };
+		071D4DF829E6906E004AFDA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 071D4DF729E6906E004AFDA4 /* Assets.xcassets */; };
+		071D4DFB29E6906E004AFDA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 071D4DF929E6906E004AFDA4 /* LaunchScreen.storyboard */; };
+		071D4E0729E69172004AFDA4 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4E0629E69172004AFDA4 /* Products.swift */; };
+		071D4E0929E6B6EE004AFDA4 /* APIcall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4E0829E6B6EE004AFDA4 /* APIcall.swift */; };
+		071D4F1029F0F122004AFDA4 /* TopLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4F0F29F0F122004AFDA4 /* TopLine.swift */; };
+		071D4F7229F68AFC004AFDA4 /* AdBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4F7129F68AFC004AFDA4 /* AdBannerCell.swift */; };
+		0773B2DE29F77AEC00357A05 /* CategoriesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B2DD29F77AEC00357A05 /* CategoriesSection.swift */; };
+		0773B2E029F7BE8900357A05 /* FeaturedProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B2DF29F7BE8900357A05 /* FeaturedProducts.swift */; };
+		0773B2E229F7BEA400357A05 /* HotDealsOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B2E129F7BEA400357A05 /* HotDealsOfTheDay.swift */; };
+		0773B2E429F7BECA00357A05 /* PopularBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B2E329F7BECA00357A05 /* PopularBrand.swift */; };
+		0773B2E629FA279500357A05 /* ecomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B2E529FA279500357A05 /* ecomImage.swift */; };
+		62E20DFA7245835A64221E5C /* Pods_eSewaMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFC6894215CBCE1F7E35BAB /* Pods_eSewaMarket.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		071D4DEB29E6906C004AFDA4 /* eSewaMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eSewaMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		071D4DEE29E6906C004AFDA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		071D4DF029E6906C004AFDA4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		071D4DF229E6906C004AFDA4 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		071D4DF529E6906C004AFDA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		071D4DF729E6906E004AFDA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		071D4DFA29E6906E004AFDA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		071D4DFC29E6906E004AFDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		071D4E0629E69172004AFDA4 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
+		071D4E0829E6B6EE004AFDA4 /* APIcall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIcall.swift; sourceTree = "<group>"; };
+		071D4F0F29F0F122004AFDA4 /* TopLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLine.swift; sourceTree = "<group>"; };
+		071D4F7129F68AFC004AFDA4 /* AdBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerCell.swift; sourceTree = "<group>"; };
+		0773B2DD29F77AEC00357A05 /* CategoriesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSection.swift; sourceTree = "<group>"; };
+		0773B2DF29F7BE8900357A05 /* FeaturedProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedProducts.swift; sourceTree = "<group>"; };
+		0773B2E129F7BEA400357A05 /* HotDealsOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotDealsOfTheDay.swift; sourceTree = "<group>"; };
+		0773B2E329F7BECA00357A05 /* PopularBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularBrand.swift; sourceTree = "<group>"; };
+		0773B2E529FA279500357A05 /* ecomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ecomImage.swift; sourceTree = "<group>"; };
+		622DD658AC17B09844A5E1BF /* Pods-eSewaMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eSewaMarket.debug.xcconfig"; path = "Target Support Files/Pods-eSewaMarket/Pods-eSewaMarket.debug.xcconfig"; sourceTree = "<group>"; };
+		63653DBEB0F562A1AC6E6C67 /* Pods-eSewaMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eSewaMarket.release.xcconfig"; path = "Target Support Files/Pods-eSewaMarket/Pods-eSewaMarket.release.xcconfig"; sourceTree = "<group>"; };
+		EBFC6894215CBCE1F7E35BAB /* Pods_eSewaMarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eSewaMarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		071D4DE829E6906C004AFDA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62E20DFA7245835A64221E5C /* Pods_eSewaMarket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		071D4DE229E6906C004AFDA4 = {
+			isa = PBXGroup;
+			children = (
+				071D4DED29E6906C004AFDA4 /* eSewaMarket */,
+				071D4DEC29E6906C004AFDA4 /* Products */,
+				28C775A98C08F28959AFA0FE /* Pods */,
+				BDFA1B7FAE9E2614FFFE610D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		071D4DEC29E6906C004AFDA4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				071D4DEB29E6906C004AFDA4 /* eSewaMarket.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		071D4DED29E6906C004AFDA4 /* eSewaMarket */ = {
+			isa = PBXGroup;
+			children = (
+				071D4E6C29E7D13B004AFDA4 /* MVP */,
+				071D4E0529E6913F004AFDA4 /* api */,
+				071D4DEE29E6906C004AFDA4 /* AppDelegate.swift */,
+				071D4DF029E6906C004AFDA4 /* SceneDelegate.swift */,
+				071D4DF429E6906C004AFDA4 /* Main.storyboard */,
+				071D4DF729E6906E004AFDA4 /* Assets.xcassets */,
+				071D4DF929E6906E004AFDA4 /* LaunchScreen.storyboard */,
+				071D4DFC29E6906E004AFDA4 /* Info.plist */,
+			);
+			path = eSewaMarket;
+			sourceTree = "<group>";
+		};
+		071D4E0229E690CB004AFDA4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				071D4E0629E69172004AFDA4 /* Products.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		071D4E0329E690E5004AFDA4 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		071D4E0429E690FA004AFDA4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				071D4DF229E6906C004AFDA4 /* HomeController.swift */,
+				071D4F7129F68AFC004AFDA4 /* AdBannerCell.swift */,
+				0773B2DD29F77AEC00357A05 /* CategoriesSection.swift */,
+				0773B2DF29F7BE8900357A05 /* FeaturedProducts.swift */,
+				0773B2E129F7BEA400357A05 /* HotDealsOfTheDay.swift */,
+				0773B2E529FA279500357A05 /* ecomImage.swift */,
+				0773B2E329F7BECA00357A05 /* PopularBrand.swift */,
+				071D4F0F29F0F122004AFDA4 /* TopLine.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		071D4E0529E6913F004AFDA4 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				071D4E0829E6B6EE004AFDA4 /* APIcall.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		071D4E6C29E7D13B004AFDA4 /* MVP */ = {
+			isa = PBXGroup;
+			children = (
+				071D4E0229E690CB004AFDA4 /* Model */,
+				071D4E0429E690FA004AFDA4 /* View */,
+				071D4E0329E690E5004AFDA4 /* Presenter */,
+			);
+			path = MVP;
+			sourceTree = "<group>";
+		};
+		28C775A98C08F28959AFA0FE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				622DD658AC17B09844A5E1BF /* Pods-eSewaMarket.debug.xcconfig */,
+				63653DBEB0F562A1AC6E6C67 /* Pods-eSewaMarket.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BDFA1B7FAE9E2614FFFE610D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBFC6894215CBCE1F7E35BAB /* Pods_eSewaMarket.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		071D4DEA29E6906C004AFDA4 /* eSewaMarket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 071D4DFF29E6906E004AFDA4 /* Build configuration list for PBXNativeTarget "eSewaMarket" */;
+			buildPhases = (
+				E5F73D0BEE3B983E2381B3D2 /* [CP] Check Pods Manifest.lock */,
+				071D4DE729E6906C004AFDA4 /* Sources */,
+				071D4DE829E6906C004AFDA4 /* Frameworks */,
+				071D4DE929E6906C004AFDA4 /* Resources */,
+				4A06C0255604DBF6221FBA67 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = eSewaMarket;
+			productName = eSewaMarket;
+			productReference = 071D4DEB29E6906C004AFDA4 /* eSewaMarket.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		071D4DE329E6906C004AFDA4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					071D4DEA29E6906C004AFDA4 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 071D4DE629E6906C004AFDA4 /* Build configuration list for PBXProject "eSewaMarket" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 071D4DE229E6906C004AFDA4;
+			productRefGroup = 071D4DEC29E6906C004AFDA4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				071D4DEA29E6906C004AFDA4 /* eSewaMarket */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		071D4DE929E6906C004AFDA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071D4DFB29E6906E004AFDA4 /* LaunchScreen.storyboard in Resources */,
+				071D4DF829E6906E004AFDA4 /* Assets.xcassets in Resources */,
+				071D4DF629E6906C004AFDA4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A06C0255604DBF6221FBA67 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-eSewaMarket/Pods-eSewaMarket-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-eSewaMarket/Pods-eSewaMarket-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eSewaMarket/Pods-eSewaMarket-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5F73D0BEE3B983E2381B3D2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-eSewaMarket-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		071D4DE729E6906C004AFDA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071D4DF329E6906C004AFDA4 /* HomeController.swift in Sources */,
+				0773B2E229F7BEA400357A05 /* HotDealsOfTheDay.swift in Sources */,
+				071D4F1029F0F122004AFDA4 /* TopLine.swift in Sources */,
+				0773B2E429F7BECA00357A05 /* PopularBrand.swift in Sources */,
+				0773B2E029F7BE8900357A05 /* FeaturedProducts.swift in Sources */,
+				071D4E0729E69172004AFDA4 /* Products.swift in Sources */,
+				071D4DEF29E6906C004AFDA4 /* AppDelegate.swift in Sources */,
+				071D4E0929E6B6EE004AFDA4 /* APIcall.swift in Sources */,
+				0773B2DE29F77AEC00357A05 /* CategoriesSection.swift in Sources */,
+				0773B2E629FA279500357A05 /* ecomImage.swift in Sources */,
+				071D4DF129E6906C004AFDA4 /* SceneDelegate.swift in Sources */,
+				071D4F7229F68AFC004AFDA4 /* AdBannerCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		071D4DF429E6906C004AFDA4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				071D4DF529E6906C004AFDA4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		071D4DF929E6906E004AFDA4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				071D4DFA29E6906E004AFDA4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		071D4DFD29E6906E004AFDA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		071D4DFE29E6906E004AFDA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		071D4E0029E6906E004AFDA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 622DD658AC17B09844A5E1BF /* Pods-eSewaMarket.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D6U9R6DD6W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = eSewaMarket/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.junaid.eSewaMarket;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		071D4E0129E6906E004AFDA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63653DBEB0F562A1AC6E6C67 /* Pods-eSewaMarket.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D6U9R6DD6W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = eSewaMarket/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.junaid.eSewaMarket;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		071D4DE629E6906C004AFDA4 /* Build configuration list for PBXProject "eSewaMarket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				071D4DFD29E6906E004AFDA4 /* Debug */,
+				071D4DFE29E6906E004AFDA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		071D4DFF29E6906E004AFDA4 /* Build configuration list for PBXNativeTarget "eSewaMarket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				071D4E0029E6906E004AFDA4 /* Debug */,
+				071D4E0129E6906E004AFDA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 071D4DE329E6906C004AFDA4 /* Project object */;
+}
