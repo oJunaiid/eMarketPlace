@@ -11,3 +11,7 @@ target 'eSewaMarket' do
 
 
 end
+
+pod 'Kingfisher'
+
+pod 'Alamofire'
