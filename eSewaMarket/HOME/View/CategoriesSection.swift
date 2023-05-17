@@ -79,7 +79,6 @@ extension CategoriesSection: UICollectionViewDataSource {
         if let product = products?[indexPath.row], indexPath.row < min(4, products?.count ?? 0) {
                 cell.configure(with: product)
             } else {
-                // Set a default image or text for the cell
                 cell.label.text = "yolo"
             }
             return cell

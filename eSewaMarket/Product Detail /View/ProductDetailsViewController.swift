@@ -9,7 +9,7 @@ import UIKit
 
 class ProductDetails: UIViewController, ProductDescriptionProtocol {
     
-    var items: [AddCartModel]?
+//    var items: [AddCartModel]?
 
     var presenter: ProductInfoPresenter!
     
@@ -125,38 +125,38 @@ extension ProductDetails: UITableViewDataSource {
            }
     }
         
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 2 {
-            let footer = UIView()
-            footer.translatesAutoresizingMaskIntoConstraints = false
-                    
-            
-            
-            
-            let button = UIButton()
-                    button.setTitle("View More", for: .normal)
-                    button.setTitleColor(.white, for: .normal)
-                    button.backgroundColor = .black
-//            button.translatesAutoresizingMaskIntoConstraints = false
-      
-                    button.addTarget(self, action: #selector(viewMoreButtonTapped), for: .touchUpInside)
-           
-            NSLayoutConstraint.activate([
-//                footer.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 0),
-//                footer.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 0),
-//                footer.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: 0),
-                footer.heightAnchor.constraint(equalToConstant: 44),
-            
-//                button.widthAnchor.constraint(equalToConstant: 300),
-//                button.centerXAnchor.constraint(equalTo: footer.centerXAnchor)
-])
-                    footer.addSubview(button)
-                    
-                    return footer
-        }
-        
-        return nil
-    }
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        if section == 2 {
+//            let footer = UIView()
+//            footer.translatesAutoresizingMaskIntoConstraints = false
+//
+//
+//
+//
+//            let button = UIButton()
+//                    button.setTitle("View More", for: .normal)
+//                    button.setTitleColor(.white, for: .normal)
+//                    button.backgroundColor = .black
+////            button.translatesAutoresizingMaskIntoConstraints = false
+//
+//                    button.addTarget(self, action: #selector(viewMoreButtonTapped), for: .touchUpInside)
+//
+//            NSLayoutConstraint.activate([
+////                footer.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 0),
+////                footer.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 0),
+////                footer.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: 0),
+//                footer.heightAnchor.constraint(equalToConstant: 44),
+//
+////                button.widthAnchor.constraint(equalToConstant: 300),
+////                button.centerXAnchor.constraint(equalTo: footer.centerXAnchor)
+//])
+//                    footer.addSubview(button)
+//
+//                    return footer
+//        }
+//
+//        return nil
+//    }
 
 
 
@@ -184,7 +184,7 @@ extension ProductDetails: UITableViewDataSource {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: DescriptionTableViewCell.reuseIdentifier, for: indexPath) as! DescriptionTableViewCell
             let productDescriptions = presenter?.description ?? []
-            cell.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // remove existing views in the stack view
+//            cell.stackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // remove existing views in the stack view
             productDescriptions.forEach { description in
                 cell.addRandomDescription()
             }
@@ -197,18 +197,4 @@ extension ProductDetails: UITableViewDataSource {
         }
  }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        switch indexPath.section {
-//        case 0:
-//        return UITableView.automaticDimension
-//        case 1:
-//        return UITableView.automaticDimension
-//        case 2:
-//            return UITableView.automaticDimension
-//        default:
-//            return 0
-//            
-//    }
-//   
-//}
 }

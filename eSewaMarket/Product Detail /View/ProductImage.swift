@@ -22,7 +22,7 @@ class ProductImage: UITableViewCell {
     }()
      let productImage: UIImageView = {
         let image = UIImageView(image: UIImage(named: ""))
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
         
         return image

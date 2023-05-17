@@ -8,7 +8,7 @@ import Foundation
 import SwiftyJSON
 import UIKit
 
-class ProductModel: Decodable {
+class ProductModel {
     var id: Int?
     var title: String?
     var price: Double?
@@ -26,45 +26,76 @@ class ProductModel: Decodable {
         self.description = description
     }
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case price
-        case category
-        case description
-        case image
-        case rating
-    }
+    
+    init(json: JSON) {
 
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        id = try values.decodeIfPresent(Int.self, forKey: .id)
-        title = try values.decodeIfPresent(String.self, forKey: .title)
-        price = try values.decodeIfPresent(Double.self, forKey: .price)
-        category = try values.decodeIfPresent(String.self, forKey: .category)
-        description = try values.decodeIfPresent(String.self, forKey: .description)
-        image = try values.decodeIfPresent(String.self, forKey: .image)
-        rating = try values.decodeIfPresent(Rating.self, forKey: .rating)
+        self.id = json["id"].int
+        self.title = json["title"].string
+        self.price = json["price"].double
+        self.category = json["category"].string
+        self.image = json["image"].string
+        self.description = json["description"].string
+        
+        if let category = json["category"].string {
+            switch category {
+            case "electronics":
+                self.category = Category.electronics.rawValue
+            case "jewelery":
+                self.category = Category.jewelery.rawValue
+            case "men's clothing":
+                self.category = Category.menSClothing.rawValue
+            case "women's clothing":
+                self.category = Category.womenSClothing.rawValue
+            default:
+                self.category = nil
+            }
+        } else {
+            self.category = nil
+           }
+       }
+
     }
-}
+    
+//    enum CodingKeys: String, CodingKey {
+//            case id
+//            case title
+//            case price
+//            case category
+//            case description
+//            case image
+//            case rating
+//        }
+//
+//        required init(from decoder: Decoder) throws {
+//            let values = try decoder.container(keyedBy: CodingKeys.self)
+//            id = try values.decodeIfPresent(Int.self, forKey: .id)
+//            title = try values.decodeIfPresent(String.self, forKey: .title)
+//            price = try values.decodeIfPresent(Double.self, forKey: .price)
+//            category = try values.decodeIfPresent(String.self, forKey: .category)
+//            description = try values.decodeIfPresent(String.self, forKey: .description)
+//            image = try values.decodeIfPresent(String.self, forKey: .image)
+//            rating = try values.decodeIfPresent(Rating.self, forKey: .rating)
+//        }
+//    }
 
 struct Rating: Decodable {
     var rate: Double?
     var count: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case rate
-        case count
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        rate = try values.decodeIfPresent(Double.self, forKey: .rate)
-        count = try values.decodeIfPresent(Int.self, forKey: .count)
-    }
 }
+//
+//    enum CodingKeys: String, CodingKey {
+//        case rate
+//        case count
+//    }
+//
+//    init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        rate = try values.decodeIfPresent(Double.self, forKey: .rate)
+//        count = try values.decodeIfPresent(Int.self, forKey: .count)
+//    }
+//}
 
-enum Category: String, Codable {
+enum Category: String {
     case electronics = "electronics"
     case jewelery = "jewelery"
     case menSClothing = "men's clothing"

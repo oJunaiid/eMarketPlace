@@ -31,7 +31,7 @@ class ImageCell: UITableViewCell {
         // Add Auto Layout constraints for the image view
         NSLayoutConstraint.activate([
             cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             cellImageView.heightAnchor.constraint(equalToConstant: 150)

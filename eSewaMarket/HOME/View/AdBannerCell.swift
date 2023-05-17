@@ -9,7 +9,7 @@ import UIKit
 
 class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
     
-    var itemList: [BannerImage]?
+//    var itemList: [BannerImage]?
     
     let pageControl = UIPageControl()
     

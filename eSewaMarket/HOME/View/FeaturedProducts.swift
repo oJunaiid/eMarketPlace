@@ -14,20 +14,20 @@ class FeaturedProducts: UITableViewCell {
     private let cellReuseIdentifier = "FeaturedProducts"
     
     static let reuseIdentifier = "FeaturedProducts"
- 
     
     var products: [ProductModel]?
-     
+    
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 10
+        layout.minimumInteritemSpacing = 15
         layout.collectionView?.showsHorizontalScrollIndicator = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemPink
         collectionView.showsHorizontalScrollIndicator = false
+        
         
         return collectionView
     }()
@@ -52,7 +52,7 @@ class FeaturedProducts: UITableViewCell {
             collectionView.heightAnchor.constraint(equalToConstant: 250),
             collectionView.widthAnchor.constraint(equalToConstant: 100),
         ])
-                
+        
         collectionView.register(FeaturedCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         
     }
@@ -67,9 +67,9 @@ class FeaturedProducts: UITableViewCell {
     
     private func setupCollectionView() {
         collectionView.backgroundColor = .clear
-
+        
     }
-
+    
     @objc func scrollToRight() {
         let lastItemIndex = collectionView.numberOfItems(inSection: 0) - 1
         let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
@@ -93,8 +93,8 @@ extension FeaturedProducts: UICollectionViewDataSource {
             cell.configure(with: product)
         }
         
-return cell
-}
+        return cell
+    }
     
 }
 extension FeaturedProducts: UICollectionViewDelegateFlowLayout {
@@ -130,9 +130,9 @@ class FeaturedCell: UICollectionViewCell {
         contentView.addSubview(heartButton)
         contentView.addSubview(addToCart)
         
-
         
-        productImage.translatesAutoresizingMaskIntoConstraints = false        
+        
+        productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.contentMode = .scaleAspectFit
         
         productImage.layer.cornerRadius = 20
@@ -145,7 +145,7 @@ class FeaturedCell: UICollectionViewCell {
             productImage.heightAnchor.constraint(equalToConstant: 140)
         ])
         
-//        name.text = "Nothing 2"
+        //        name.text = "Nothing 2"
         name.font = UIFont.systemFont(ofSize: 14)
         name.numberOfLines = 1
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +154,7 @@ class FeaturedCell: UICollectionViewCell {
             name.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 4),
             name.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             name.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 4)
-
+            
         ])
         
         categoryLine.textColor = .lightGray
@@ -167,7 +167,7 @@ class FeaturedCell: UICollectionViewCell {
             
         ])
         
-//        productPrice.text = "Rs. 70,000"
+        //        productPrice.text = "Rs. 70,000"
         productPrice.textColor = .black
         productPrice.font = UIFont.systemFont(ofSize: 14)
         productPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -202,7 +202,7 @@ class FeaturedCell: UICollectionViewCell {
         addToCart.setImage(UIImage(systemName: "plus"), for: .normal)
         addToCart.translatesAutoresizingMaskIntoConstraints = false
         addToCart.tintColor = .white
-
+        
         NSLayoutConstraint.activate([
             addToCart.topAnchor.constraint(equalTo: productPrice.bottomAnchor, constant: 5),
             addToCart.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
@@ -211,9 +211,9 @@ class FeaturedCell: UICollectionViewCell {
     
     func configure(with product: ProductModel) {
         name.text = product.title
-        productPrice.text = "Rs.\(product.price ?? 00)"
+        productPrice.text = "$\(product.price ?? 00)"
         categoryLine.text = product.category
-
+        
         if let url = URL(string: product.image ?? "t") {
             productImage.kf.setImage(with: url)
         }

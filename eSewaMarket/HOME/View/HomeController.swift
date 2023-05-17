@@ -10,7 +10,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
     
     var presenter: HomePresenter?
     var products = [ProductModel]()
-    var items: [BannerPresenter]?
+//    var items: [BannerPresenter]?
     
     let tableView = UITableView()
     let searchController = UISearchController(searchResultsController: nil)
@@ -200,24 +200,41 @@ extension HomeController: UITableViewDataSource {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return ""
-        case 1:
-            return "Categories"
-        case 2:
-            return "Featured Products"
-        case 3:
-            return "Hot Deals Of TheDay"
-        case 4:
-            return ""
-        case 5:
-            return "Popular Brand"
-        default:
-            return nil
-        }
-    }
+    internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView()
+                headerView.backgroundColor = UIColor(named: "Color")
+                
+                let titleLabel = UILabel()
+                titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+                titleLabel.textColor = .black
+                titleLabel.translatesAutoresizingMaskIntoConstraints = false
+                headerView.addSubview(titleLabel)
+                
+                NSLayoutConstraint.activate([
+                    titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+                    titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+                ])
+                
+                switch section {
+                case 0:
+                    titleLabel.text = nil
+                case 1:
+                    titleLabel.text = "Categories"
+                case 2:
+                    titleLabel.text = "Featured Products"
+                case 3:
+                    titleLabel.text = "Hot Deals Of TheDay"
+//                case 4:
+//                    titleLabel.text = ""
+                case 5:
+                    titleLabel.text = "Popular Brand"
+                default:
+                    titleLabel.text = nil
+                }
+                return headerView
+            }
+            
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -269,8 +286,6 @@ extension HomeController: UITableViewDataSource {
     
     
 }
-
-
 extension HomeController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
