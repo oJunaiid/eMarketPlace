@@ -10,8 +10,8 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
     
     var presenter: HomePresenter?
     var products = [ProductModel]()
-//    var items: [BannerPresenter]?
-    
+    var categories = [CategorieModel]()
+//    var category = [CategorieModel]()
     let tableView = UITableView()
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -22,6 +22,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         setupViews()
         presenter = (HomePresenter(delegate: self))
         presenter?.fetch()
+        presenter?.fetchC()
         
         let footer = UIView()
         footer.backgroundColor = .lightGray
@@ -80,8 +81,12 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         menuButton.addTarget(self, action: #selector(menuDidTap), for: .touchUpInside)
     }
     
-    func didFetchModel(with products: [ProductModel]) {
+    func didFetchProducts(with products: [ProductModel]) {
         self.products = products
+        tableView.reloadData()
+    }
+    func didFetchCategorie(with category: [CategorieModel]) {
+        self.categories = category
         tableView.reloadData()
     }
     
@@ -159,17 +164,26 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
             helloText.heightAnchor.constraint(equalToConstant: 15)
         ])
         
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 44))
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 120, width: 200, height: 44))
+        searchBar.placeholder = "Search For Everything Here"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         navBar.addSubview(searchBar)
-
-        view.addSubview(tableView)
         
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: helloText.bottomAnchor, constant: 10),
+            searchBar.leadingAnchor.constraint(equalTo: navBar.leadingAnchor, constant: 10),
+            searchBar.trailingAnchor.constraint(equalTo: navBar.trailingAnchor, constant: -10),
+            searchBar.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        view.addSubview(tableView)
+        tableView.allowsSelection = false
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: -5),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
         ])
         tableView.backgroundColor = UIColor(named: "Color")
         
@@ -217,16 +231,12 @@ extension HomeController: UITableViewDataSource {
                 ])
                 
                 switch section {
-                case 0:
-                    titleLabel.text = nil
                 case 1:
                     titleLabel.text = "Categories"
                 case 2:
                     titleLabel.text = "Featured Products"
                 case 3:
                     titleLabel.text = "Hot Deals Of TheDay"
-//                case 4:
-//                    titleLabel.text = ""
                 case 5:
                     titleLabel.text = "Popular Brand"
                 default:
@@ -245,7 +255,7 @@ extension HomeController: UITableViewDataSource {
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesSection.reuseIdentifier, for: indexPath) as! CategoriesSection
-            cell.configure(with: self.products)
+            cell.configure(with: self.categories)
             cell.backgroundColor = .clear
             return cell
             
@@ -288,8 +298,11 @@ extension HomeController: UITableViewDataSource {
 }
 extension HomeController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+         func setSelected(_ selected: Bool, animated: Bool) {
+              // Do not call super implementation to prevent highlighting
+          }
     }
+    
 }
 extension AdBannerCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

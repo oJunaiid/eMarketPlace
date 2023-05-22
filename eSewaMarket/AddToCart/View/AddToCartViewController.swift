@@ -63,7 +63,8 @@ class AddToCartViewController: UIViewController, AddToCartProtocol {
     
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+            tableView.allowsSelection = false
+
             // Initialize the presenter with the view controller as the delegate
             presenter = AddCartItemPresenter(view: self, delegate: self)
             
@@ -110,7 +111,7 @@ class AddToCartViewController: UIViewController, AddToCartProtocol {
                 footerView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
                 footerView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
                 footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                footerView.heightAnchor.constraint(equalToConstant: 120)
+                footerView.heightAnchor.constraint(equalToConstant: 100)
             ])
             
             NSLayoutConstraint.activate([
@@ -123,7 +124,6 @@ class AddToCartViewController: UIViewController, AddToCartProtocol {
                 checkoutPrice.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 10),
               
             ])
-
             NSLayoutConstraint.activate([
                 checkoutButton.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 10),
                 checkoutButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -10),
@@ -152,8 +152,6 @@ class AddToCartViewController: UIViewController, AddToCartProtocol {
         items = model
         tableView.reloadData()
     }
-    
-    
 }
 
     extension AddToCartViewController: UITableViewDelegate {
@@ -161,7 +159,6 @@ class AddToCartViewController: UIViewController, AddToCartProtocol {
             print("clicked cell at \(indexPath.row)")
         }
 
-        
         // DELETE ROW WITH SWIPE ACTION
         func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
             return true
@@ -182,7 +179,7 @@ class AddToCartViewController: UIViewController, AddToCartProtocol {
             vc.onCancel = {
                 vc.dismiss(animated: true, completion: nil)
             }
-                vc.modalPresentationStyle = .popover
+                vc.modalPresentationStyle = .pageSheet
                 self.present(vc, animated: true)
                 
             }
@@ -213,24 +210,26 @@ class AddToCartViewController: UIViewController, AddToCartProtocol {
                 cell.image.image = item.itemImage
                 cell.priceLabel.text = "Rs.\(item.itemPrice ?? 00)"
                 cell.quantityLabel.text = "\(item.totalItemCount ?? 1)"
-            
-
+ 
             return cell
         } 
      
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 130
         }
-        func configureProductCell(_ cell: AddToCartViewCell, for indexPath: IndexPath) {
-                
-                // Configure the cell here...
-                
-//                cell.updatedPrice = { [weak self] totalPrice in
-                    // Update the UI with the total price
-//                    self?.checkoutPrice.text = String(format: "Rs.%.2f", totalPrice)
-                }
-            }
-    
+    }
+
+
+//        func configureProductCell(_ cell: AddToCartViewCell, for indexPath: IndexPath) {
+//
+//                // Configure the cell here...
+//
+////                cell.updatedPrice = { [weak self] totalPrice in
+//                    // Update the UI with the total price
+////                    self?.checkoutPrice.text = String(format: "Rs.%.2f", totalPrice)
+//                }
+//            }
+//
     
 
 

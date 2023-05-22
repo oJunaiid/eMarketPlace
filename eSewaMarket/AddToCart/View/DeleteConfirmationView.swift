@@ -107,10 +107,10 @@ class DeleteConfirmationView: UIViewController {
         
     }
     
-    @objc private func cancelButtonTapped() {
+    @objc func cancelButtonTapped() {
         onCancel?()
     }
-    @objc private func confirmButtonTapped() {
+    @objc func confirmButtonTapped() {
         onConfirm?("The selected item has been delete from the list")
     }
 }

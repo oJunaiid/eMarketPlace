@@ -9,7 +9,7 @@ import UIKit
 
 class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
     
-//    var itemList: [BannerImage]?
+    //    var itemList: [BannerImage]?
     
     let pageControl = UIPageControl()
     
@@ -28,6 +28,7 @@ class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
     
     
     static let reuseIdentifier = "AdBannerCell"
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -50,17 +51,6 @@ class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
         pageControl.currentPage = 0 // set the current page to the first page (index 0)
         
         
-        
-        func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
-            pageControl.currentPage = Int(pageIndex)
-            
-            let visibleCells = collectionView.visibleCells
-            guard let firstVisibleCell = visibleCells.first else { return }
-            let visibleIndex = collectionView.indexPath(for: firstVisibleCell)?.item ?? 0
-            pageControl.currentPage = visibleIndex
-            
-        }
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -111,7 +101,7 @@ extension AdBannerCell: UICollectionViewDataSource {
 class AdCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "image1"))
+        let imageView = UIImageView(image: UIImage(named: "banner3"))
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
@@ -127,9 +117,9 @@ class AdCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            imageView.heightAnchor.constraint(equalToConstant: 10)
+//            imageView.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
     required init?(coder: NSCoder) {

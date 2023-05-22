@@ -57,7 +57,7 @@ class FeaturedProducts: UITableViewCell {
         
     }
     func configure(with product: [ProductModel]) {
-        self.products = product
+        self.products = product.shuffled()
         collectionView.reloadData()
     }
     
@@ -70,11 +70,11 @@ class FeaturedProducts: UITableViewCell {
         
     }
     
-    @objc func scrollToRight() {
-        let lastItemIndex = collectionView.numberOfItems(inSection: 0) - 1
-        let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
-        collectionView.scrollToItem(at: lastItemIndexPath, at: .right, animated: true)
-    }
+//    @objc func scrollToRight() {
+//        let lastItemIndex = collectionView.numberOfItems(inSection: 0) - 1
+//        let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
+//        collectionView.scrollToItem(at: lastItemIndexPath, at: .right, animated: true)
+//    }
 }
 
 
@@ -95,7 +95,10 @@ extension FeaturedProducts: UICollectionViewDataSource {
         
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
+    }
+
 }
 extension FeaturedProducts: UICollectionViewDelegateFlowLayout {
     
@@ -122,6 +125,7 @@ class FeaturedCell: UICollectionViewCell {
         self.backgroundColor = .white
         
         contentView.layer.cornerRadius = 40
+        contentView.layer.masksToBounds = true
         contentView.addSubview(productImage)
         contentView.addSubview(productPrice)
         contentView.addSubview(categoryLine)
@@ -134,8 +138,7 @@ class FeaturedCell: UICollectionViewCell {
         
         productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.contentMode = .scaleAspectFit
-        
-        productImage.layer.cornerRadius = 20
+        productImage.layer.cornerRadius = 0
         productImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -145,7 +148,6 @@ class FeaturedCell: UICollectionViewCell {
             productImage.heightAnchor.constraint(equalToConstant: 140)
         ])
         
-        //        name.text = "Nothing 2"
         name.font = UIFont.systemFont(ofSize: 14)
         name.numberOfLines = 1
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +169,6 @@ class FeaturedCell: UICollectionViewCell {
             
         ])
         
-        //        productPrice.text = "Rs. 70,000"
         productPrice.textColor = .black
         productPrice.font = UIFont.systemFont(ofSize: 14)
         productPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -180,7 +181,7 @@ class FeaturedCell: UICollectionViewCell {
         
         addButtonView.translatesAutoresizingMaskIntoConstraints = false
         addButtonView.backgroundColor = .black
-        addButtonView.layer.cornerRadius = 20
+        addButtonView.layer.cornerRadius = 0
         addButtonView.layer.maskedCorners = [.layerMinXMinYCorner]
         
         NSLayoutConstraint.activate([

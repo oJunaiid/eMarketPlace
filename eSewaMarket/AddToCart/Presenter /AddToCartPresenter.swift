@@ -13,7 +13,7 @@ protocol AddToCartProtocol: NSObject {
 }
 class AddCartItemPresenter {
 
-    var items = [AddCartModel(itemName: "Computer", itemDesc: "HP", itemPrice: 3000, itemImage: UIImage(named: "com"), totalItemCount: 1), AddCartModel(itemName: "Laptop", itemDesc: "Macbook", itemPrice: 3000, itemImage: UIImage(named: "computerImage"), totalItemCount: 1), AddCartModel(itemName: "Airpod", itemDesc: "Airpod Max", itemPrice: 3000, itemImage: UIImage(named: "max"), totalItemCount: 1)]
+    var items = [AddCartModel(itemName: "Computer", itemDesc: "HP", itemPrice: 2000, itemImage: UIImage(named: "com"), totalItemCount: 1), AddCartModel(itemName: "Laptop", itemDesc: "Macbook", itemPrice: 3000, itemImage: UIImage(named: "computerImage"), totalItemCount: 1), AddCartModel(itemName: "Airpod", itemDesc: "Airpod Max", itemPrice: 6000, itemImage: UIImage(named: "max"), totalItemCount: 1)]
 
 
     var delegate: AddToCartProtocol?

@@ -15,7 +15,7 @@ protocol ProductDescriptionProtocol: NSObject {
 }
 
 class ProductInfoPresenter {
-    var description = [ProductDescriptionModel(itemName: "Nothing Phone", itemPrice: 70000, itemImage: UIImage(named: "as"))]
+    var description = [ProductDescriptionModel(itemName: "Fjallraven - Foldsack No. 1 Backpack", itemPrice: 109.95, itemImage: UIImage(named: "bag"))]
  
     var delegate: ProductDescriptionProtocol?
     

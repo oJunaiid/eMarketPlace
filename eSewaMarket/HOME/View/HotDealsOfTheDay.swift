@@ -18,7 +18,7 @@ class HotDealsOfTheDay: UITableViewCell {
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = 10
         layout.collectionView?.showsHorizontalScrollIndicator = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -52,7 +52,7 @@ class HotDealsOfTheDay: UITableViewCell {
     }
     
     func configure(with product: [ProductModel]) {
-        self.products = product
+        self.products = product.shuffled()
         collectionView.reloadData()
     }
     

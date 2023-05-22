@@ -9,17 +9,17 @@ import UIKit
 
 class CategoriesSection: UITableViewCell, UICollectionViewDelegate {
     
-    
     private let cellReuseIdentifier = "CategoriesCell"
     
     static let reuseIdentifier = "CategoriesCell"
     
-    var products: [ProductModel]?
-    
+    var category: [CategorieModel]?
+
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 10
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemPink
@@ -51,8 +51,8 @@ class CategoriesSection: UITableViewCell, UICollectionViewDelegate {
         collectionView.register(CategoriesCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
     }
     
-    func configure(with product: [ProductModel]) {
-        self.products = product
+    func configure(with category: [CategorieModel]) {
+        self.category = category
         collectionView.reloadData()
     }
     
@@ -67,22 +67,21 @@ class CategoriesSection: UITableViewCell, UICollectionViewDelegate {
 
 extension CategoriesSection: UICollectionViewDataSource {
     
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return min(4, products?.count ?? 0)
+        return category?.count ?? 0
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! CategoriesCell
-        
-        if let product = products?[indexPath.row], indexPath.row < min(4, products?.count ?? 0) {
-                cell.configure(with: product)
-            } else {
-                cell.label.text = "yolo"
-            }
-            return cell
-        }
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! CategoriesCell
+    
+//        let categorie = category?[indexPath.row]
+//        if let product = categorie {
+//            cell.configure(with: product)
+//        }
+        return cell
+    }
 }
 
 extension CategoriesSection: UICollectionViewDelegateFlowLayout {
@@ -92,13 +91,17 @@ extension CategoriesSection: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//func configure(data: Categories, indexPath: IndexPath) {
+//    categoryLabel.text = data[indexPath.row].capitalized
+//}
 
 class CategoriesCell: UICollectionViewCell {
     
     var label = UILabel()
     var categoryImage = UIImage()
     var imageView = UIImageView()
-    
+
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -136,13 +139,12 @@ class CategoriesCell: UICollectionViewCell {
         ])
     }
     
-    var displayedCategories = [String]()
-
-    func configure(with products: ProductModel) {
-        label.text = products.category
-
-    }
-    
+//    var displayedCategories = [String]()
+//
+//    func configure(with category: CategorieModel) {
+//        label.text = category.category
+//    }
+//    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

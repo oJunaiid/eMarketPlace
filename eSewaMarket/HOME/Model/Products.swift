@@ -4,7 +4,6 @@
 //
 //  Created by Omar  on 4/12/23.
 
-import Foundation
 import SwiftyJSON
 import UIKit
 
@@ -25,7 +24,6 @@ class ProductModel {
         self.image = image
         self.description = description
     }
-
     
     init(json: JSON) {
 
@@ -35,7 +33,7 @@ class ProductModel {
         self.category = json["category"].string
         self.image = json["image"].string
         self.description = json["description"].string
-        
+    
         if let category = json["category"].string {
             switch category {
             case "electronics":
@@ -53,9 +51,48 @@ class ProductModel {
             self.category = nil
            }
        }
+    }
 
+class CategorieModel {
+    var category: String?
+    
+    init(category: String?) {
+    self.category = category
     }
     
+    init(json: JSON) {
+        self.category = json["category"].string
+    }
+}
+
+//
+enum Category: String {
+    case electronics
+    case jewelery
+    case menSClothing = "men's clothing"
+    case womenSClothing = "women's clothing"
+
+    init?(stringValue: String) {
+        switch stringValue {
+        case "electronics":
+            self = .electronics
+        case "jewelery":
+            self = .jewelery
+        case "men's clothing":
+            self = .menSClothing
+        case "women's clothing":
+            self = .womenSClothing
+        default:
+            return nil
+        }
+    }
+
+//    var stringValue: String {
+//        return self.rawValue
+//    }
+}
+
+
 //    enum CodingKeys: String, CodingKey {
 //            case id
 //            case title
@@ -95,12 +132,12 @@ struct Rating: Decodable {
 //    }
 //}
 
-enum Category: String {
-    case electronics = "electronics"
-    case jewelery = "jewelery"
-    case menSClothing = "men's clothing"
-    case womenSClothing = "women's clothing"
-}
+//enum Category: String {
+//    case electronics = "electronics"
+//    case jewelery = "jewelery"
+//    case menSClothing = "men's clothing"
+//    case womenSClothing = "women's clothing"
+//}
 
 struct BannerImage {
     var image: UIImage?

@@ -20,13 +20,14 @@ class ImageDescriptionViewCell: UITableViewCell {
             return containerView
 
         }()
-    
+ 
          let descriptionLabel: UILabel = {
             let title = UILabel()
 //            title.text = "Jacket"
             title.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
             title.textColor = .black
             title.translatesAutoresizingMaskIntoConstraints = false
+             title.numberOfLines = 2 
             return title
     }()
      let priceLabel: UILabel = {
@@ -39,7 +40,20 @@ class ImageDescriptionViewCell: UITableViewCell {
         return price
 }()
 
-   
+    let discountedPrice: UILabel = {
+        let previousPrice = UILabel()
+        previousPrice.text = "$10.90"
+        previousPrice.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+
+        let attributedString = NSMutableAttributedString(string: previousPrice.text ?? "")
+        attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributedString.length))
+
+        previousPrice.attributedText = attributedString
+        previousPrice.translatesAutoresizingMaskIntoConstraints = false
+        
+        return previousPrice
+    }()
+    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,6 +63,7 @@ class ImageDescriptionViewCell: UITableViewCell {
 
         containerView.addSubview(descriptionLabel)
         containerView.addSubview(priceLabel)
+        containerView.addSubview(discountedPrice)
 
 
 
@@ -71,10 +86,18 @@ class ImageDescriptionViewCell: UITableViewCell {
             priceLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -5),
 //            priceLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
+            
+            discountedPrice.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 2),
+            discountedPrice.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
         ])
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+          // Do not call super implementation to prevent highlighting
+      }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+

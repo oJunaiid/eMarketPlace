@@ -46,4 +46,7 @@ class ImageCell: UITableViewCell {
             cellImageView.image = UIImage(named: "ecom")
         }
     }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+          // Do not call super implementation to prevent highlighting
+      }
 }

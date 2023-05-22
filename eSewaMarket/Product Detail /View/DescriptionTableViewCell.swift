@@ -60,15 +60,17 @@ class DescriptionTableViewCell: UITableViewCell {
 //
     private func randomDescription() -> String {
         let descriptions = [
-            "The item is a great Jacket",
-            "This is a high-quality Jacket",
-            "The jacket are comfortable and stylish",
-            "The jacket is perfect for everyday use",
-            "These jacket are made of premium quality",
-            "The jacket is a timeless classic",
-            "The hood adds a stylish touch to any outfit"
+            "The item is a great Bag",
+            "This is a high-quality Bag",
+            "The Bag is comfortable and stylish",
+            "The Bag is perfect for everyday use",
+            "These Bag is made of premium quality",
+            "The Bag is a timeless classic",
         ]
         let randomIndex = Int.random(in: 0..<descriptions.count)
         return descriptions[randomIndex]
     }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+          // Do not call super implementation to prevent highlighting
+      }
 }

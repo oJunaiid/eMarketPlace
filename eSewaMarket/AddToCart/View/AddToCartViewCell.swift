@@ -135,6 +135,14 @@ class AddToCartViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    private var price: Double {
+//        guard let priceText = priceLabel.text, let priceValue = Double(priceText) else {
+//            return 0.0 // Default value in case the conversion fails or the label is empty
+//        }
+//        return priceValue
+//    }
+
+    
     private var price: Double = 3000.0
     private var count: Int = 1
 
@@ -170,14 +178,8 @@ class AddToCartViewCell: UITableViewCell {
             updatePriceAndCount()
 //            updatedPrice()
         }
-
-   
-
     }
-    
 
-    
-    
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -189,8 +191,7 @@ class AddToCartViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        
-        
+      
         // pin image view
         NSLayoutConstraint.activate([
             
@@ -241,9 +242,6 @@ class AddToCartViewCell: UITableViewCell {
     
           
         ])
-      
-       
     }
-    
 }
 
