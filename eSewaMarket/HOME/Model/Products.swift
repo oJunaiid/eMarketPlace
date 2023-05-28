@@ -34,63 +34,64 @@ class ProductModel {
         self.image = json["image"].string
         self.description = json["description"].string
     
-        if let category = json["category"].string {
-            switch category {
-            case "electronics":
-                self.category = Category.electronics.rawValue
-            case "jewelery":
-                self.category = Category.jewelery.rawValue
-            case "men's clothing":
-                self.category = Category.menSClothing.rawValue
-            case "women's clothing":
-                self.category = Category.womenSClothing.rawValue
-            default:
-                self.category = nil
-            }
-        } else {
-            self.category = nil
-           }
+//        if let category = json["category"].string {
+//            switch category {
+//            case "electronics":
+//                self.category = Category.electronics.rawValue
+//            case "jewelery":
+//                self.category = Category.jewelery.rawValue
+//            case "men's clothing":
+//                self.category = Category.menSClothing.rawValue
+//            case "women's clothing":
+//                self.category = Category.womenSClothing.rawValue
+//            default:
+//                self.category = nil
+//            }
+//        } else {
+//            self.category = nil
+//           }
        }
     }
 
-class CategorieModel {
+struct CategorieModel {
     var category: String?
-    
-    init(category: String?) {
-    self.category = category
-    }
-    
-    init(json: JSON) {
-        self.category = json["category"].string
-    }
+    var imageName: UIImage?
 }
-
+//    init(category: String?) {
+//    self.category = category
+//    }
 //
-enum Category: String {
-    case electronics
-    case jewelery
-    case menSClothing = "men's clothing"
-    case womenSClothing = "women's clothing"
+//    init(json: JSON) {
+//        self.category = json["category"].string
+//    }
 
-    init?(stringValue: String) {
-        switch stringValue {
-        case "electronics":
-            self = .electronics
-        case "jewelery":
-            self = .jewelery
-        case "men's clothing":
-            self = .menSClothing
-        case "women's clothing":
-            self = .womenSClothing
-        default:
-            return nil
-        }
-    }
 
+////
+//enum Category: String {
+//    case electronics
+//    case jewelery
+//    case menSClothing = "men's clothing"
+//    case womenSClothing = "women's clothing"
+//
+//    init?(stringValue: String) {
+//        switch stringValue {
+//        case "electronics":
+//            self = .electronics
+//        case "jewelery":
+//            self = .jewelery
+//        case "men's clothing":
+//            self = .menSClothing
+//        case "women's clothing":
+//            self = .womenSClothing
+//        default:
+//            return nil
+//        }
+//    }
+//
 //    var stringValue: String {
 //        return self.rawValue
 //    }
-}
+
 
 
 //    enum CodingKeys: String, CodingKey {

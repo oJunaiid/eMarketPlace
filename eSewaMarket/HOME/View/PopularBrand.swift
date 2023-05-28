@@ -18,7 +18,7 @@ class PopularBrand: UITableViewCell {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 10
+        layout.minimumInteritemSpacing = 20
         layout.collectionView?.showsHorizontalScrollIndicator = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +87,7 @@ extension PopularBrand: UICollectionViewDataSource {
 extension PopularBrand: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 270)
+        return CGSize(width: 170, height: 255)
     }
 }
 
@@ -106,7 +106,7 @@ class PopularCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        
+        self.layer.cornerRadius = 15
         contentView.addSubview(productImage)
         contentView.addSubview(productPrice)
         contentView.addSubview(likeButton)
@@ -115,14 +115,9 @@ class PopularCell: UICollectionViewCell {
         contentView.addSubview(categoryLine)
         contentView.addSubview(addToCart)
 
-        
-        contentView.layer.cornerRadius = 40
-        
-        
         productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.contentMode = .scaleAspectFit
         
-        productImage.layer.cornerRadius = 20
         productImage.translatesAutoresizingMaskIntoConstraints = false
        
 
@@ -130,7 +125,7 @@ class PopularCell: UICollectionViewCell {
             productImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             productImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: 0),
-            productImage.heightAnchor.constraint(equalToConstant: 140)
+            productImage.heightAnchor.constraint(equalToConstant: 130)
         ])
         
         
@@ -158,7 +153,7 @@ class PopularCell: UICollectionViewCell {
             
         ])
         
-        productPrice.text = "Rs. 70,000"
+//        productPrice.text = "Rs. 70,000"
         productPrice.textColor = .black
         productPrice.font = UIFont.systemFont(ofSize: 14)
         productPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -171,13 +166,13 @@ class PopularCell: UICollectionViewCell {
         
         addButtonView.translatesAutoresizingMaskIntoConstraints = false
         addButtonView.backgroundColor = .black
-        addButtonView.layer.cornerRadius = 20
-        addButtonView.layer.maskedCorners = [.layerMinXMinYCorner]
+        addButtonView.layer.cornerRadius = 10
+        addButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
         
         NSLayoutConstraint.activate([
             addButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             addButtonView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            addButtonView.heightAnchor.constraint(equalToConstant: 50),
+            addButtonView.heightAnchor.constraint(equalToConstant: 40),
             addButtonView.widthAnchor.constraint(equalToConstant: 40)
         ])
         

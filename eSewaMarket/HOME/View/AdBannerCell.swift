@@ -117,8 +117,10 @@ class AdCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+
 //            imageView.heightAnchor.constraint(equalToConstant: 10)
         ])
     }

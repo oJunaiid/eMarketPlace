@@ -21,7 +21,7 @@ class FeaturedProducts: UITableViewCell {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 15
+        layout.minimumInteritemSpacing = 20
         layout.collectionView?.showsHorizontalScrollIndicator = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,12 +69,6 @@ class FeaturedProducts: UITableViewCell {
         collectionView.backgroundColor = .clear
         
     }
-    
-//    @objc func scrollToRight() {
-//        let lastItemIndex = collectionView.numberOfItems(inSection: 0) - 1
-//        let lastItemIndexPath = IndexPath(item: lastItemIndex, section: 0)
-//        collectionView.scrollToItem(at: lastItemIndexPath, at: .right, animated: true)
-//    }
 }
 
 
@@ -103,7 +97,7 @@ extension FeaturedProducts: UICollectionViewDataSource {
 extension FeaturedProducts: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 270)
+        return CGSize(width: 170, height: 255)
     }
     
 }
@@ -123,8 +117,8 @@ class FeaturedCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        
-        contentView.layer.cornerRadius = 40
+        self.layer.cornerRadius = 15
+//        contentView.layer.cornerRadius = 40
         contentView.layer.masksToBounds = true
         contentView.addSubview(productImage)
         contentView.addSubview(productPrice)
@@ -145,7 +139,7 @@ class FeaturedCell: UICollectionViewCell {
             productImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             productImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: 0),
-            productImage.heightAnchor.constraint(equalToConstant: 140)
+            productImage.heightAnchor.constraint(equalToConstant: 130)
         ])
         
         name.font = UIFont.systemFont(ofSize: 14)
@@ -181,13 +175,13 @@ class FeaturedCell: UICollectionViewCell {
         
         addButtonView.translatesAutoresizingMaskIntoConstraints = false
         addButtonView.backgroundColor = .black
-        addButtonView.layer.cornerRadius = 0
-        addButtonView.layer.maskedCorners = [.layerMinXMinYCorner]
+        addButtonView.layer.cornerRadius = 10
+        addButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
         
         NSLayoutConstraint.activate([
             addButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             addButtonView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            addButtonView.heightAnchor.constraint(equalToConstant: 50),
+            addButtonView.heightAnchor.constraint(equalToConstant: 40),
             addButtonView.widthAnchor.constraint(equalToConstant: 40)
         ])
         

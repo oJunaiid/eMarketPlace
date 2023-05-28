@@ -12,7 +12,8 @@ import Kingfisher
 
 protocol HomePresenterProtocol: AnyObject {
     func didFetchProducts(with products: [ProductModel])
-    func didFetchCategorie(with categorie: [CategorieModel])
+    func didFetchCategorie(model: [CategorieModel])
+
     func showError(_ message: String)
 }
      let baseURL = "https://fakestoreapi.com/"
@@ -50,37 +51,25 @@ class HomePresenter {
                 }
             }
         }
+}
+
+class categoryClass {
     
-    func fetchC() {
-            fetchCategorie {[weak self] result in
-                switch result {
-                case .success(let categories):
-                    print(categories)
-                    self?.delegate?.didFetchCategorie(with: categories)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        
-        func fetchCategorie(completion: @escaping (Result<[CategorieModel], Error>) -> Void) {
-    //        let url = "\(baseURL)products"
-            let url = URL(string: "https://fakestoreapi.com/products/categories")
-            AF.request(url!).responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let products = json.map { CategorieModel(json: JSON(rawValue: $0) ?? "")}
-                    completion(.success(products))
-                case .failure(let error):
-                    print("Error: \(error)")
-                    completion(.failure(error))
-                }
-            }
-        }
+    var label = [CategorieModel(category: "electronics", imageName: UIImage(systemName: "iphone")), CategorieModel(category: "jewelery", imageName: UIImage(systemName: "mappin")), CategorieModel(category: "men's clothing", imageName: UIImage(systemName: "tshirt")), CategorieModel(category: "women's clothing", imageName: UIImage(systemName: "person.fill"))]
+    
+    weak var delegate: HomePresenterProtocol?
+    
+    weak var view: HomeController?
+    
+    init(view: HomeController, delegate: HomePresenterProtocol) {
+        self.delegate = delegate
+        self.view = view
     }
-
-
+    
+    func populateDescriptionView() {
+        self.delegate?.didFetchCategorie(model: label)
+    }
+}
 
 
 

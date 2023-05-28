@@ -9,9 +9,9 @@ import UIKit
 class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProtocol {
     
     var presenter: HomePresenter?
+    var Cpresenter: categoryClass?
     var products = [ProductModel]()
-    var categories = [CategorieModel]()
-//    var category = [CategorieModel]()
+    var categories: [CategorieModel]?
     let tableView = UITableView()
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -21,8 +21,10 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         view.backgroundColor = .white
         setupViews()
         presenter = (HomePresenter(delegate: self))
+        Cpresenter = (categoryClass(view: self, delegate: self))
         presenter?.fetch()
-        presenter?.fetchC()
+        Cpresenter?.populateDescriptionView()
+        // presenter?.fetchC()
         
         let footer = UIView()
         footer.backgroundColor = .lightGray
@@ -85,7 +87,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         self.products = products
         tableView.reloadData()
     }
-    func didFetchCategorie(with category: [CategorieModel]) {
+    func didFetchCategorie(model category: [CategorieModel]) {
         self.categories = category
         tableView.reloadData()
     }
@@ -151,7 +153,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         ])
         
         let helloText = UILabel()
-        helloText.text = "Hello Broooo, everything you will discover here"
+        helloText.text = "Hello Kiran, everything you will discover here"
         helloText.numberOfLines = 1;
         helloText.adjustsFontSizeToFitWidth = true
         helloText.translatesAutoresizingMaskIntoConstraints = false
@@ -177,13 +179,13 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         ])
         view.addSubview(tableView)
         tableView.allowsSelection = false
-
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: -5),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -45)
         ])
         tableView.backgroundColor = UIColor(named: "Color")
         
@@ -216,35 +218,40 @@ extension HomeController: UITableViewDataSource {
     
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        if section == 0 {
+               return nil
+           }
         let headerView = UIView()
-                headerView.backgroundColor = UIColor(named: "Color")
-                
-                let titleLabel = UILabel()
-                titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-                titleLabel.textColor = .black
-                titleLabel.translatesAutoresizingMaskIntoConstraints = false
-                headerView.addSubview(titleLabel)
-                
-                NSLayoutConstraint.activate([
-                    titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-                    titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-                ])
-                
-                switch section {
-                case 1:
-                    titleLabel.text = "Categories"
-                case 2:
-                    titleLabel.text = "Featured Products"
-                case 3:
-                    titleLabel.text = "Hot Deals Of TheDay"
-                case 5:
-                    titleLabel.text = "Popular Brand"
-                default:
-                    titleLabel.text = nil
-                }
-                return headerView
-            }
-            
+        headerView.backgroundColor = UIColor(named: "Color")
+        
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.textColor = .black
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+        ])
+        
+        switch section {
+        case 0:
+            titleLabel.text = "" 
+        case 1:
+            titleLabel.text = "Categories"
+        case 2:
+            titleLabel.text = "Featured Products"
+        case 3:
+            titleLabel.text = "Hot Deals Of TheDay"
+        case 5:
+            titleLabel.text = "Popular Brand"
+        default:
+            titleLabel.text = nil
+        }
+        return headerView
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -255,8 +262,11 @@ extension HomeController: UITableViewDataSource {
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesSection.reuseIdentifier, for: indexPath) as! CategoriesSection
-            cell.configure(with: self.categories)
-            cell.backgroundColor = .clear
+            if let products = categories {
+                cell.configure(with: products)
+                cell.backgroundColor = .clear
+            }
+       
             return cell
             
         case 2:
@@ -266,7 +276,7 @@ extension HomeController: UITableViewDataSource {
             
             return cell
             
-        
+            
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: HotDealsOfTheDay.reuseIdentifier, for: indexPath) as! HotDealsOfTheDay
             cell.configure(with: self.products)
@@ -275,7 +285,7 @@ extension HomeController: UITableViewDataSource {
             
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: ImageCell.reuseIdentifier, for: indexPath) as! ImageCell
-            let image = UIImage(named: "ecom") 
+            let image = UIImage(named: "ecom")
             cell.configure(with: image)
             cell.backgroundColor = .clear
             return cell
@@ -298,9 +308,9 @@ extension HomeController: UITableViewDataSource {
 }
 extension HomeController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         func setSelected(_ selected: Bool, animated: Bool) {
-              // Do not call super implementation to prevent highlighting
-          }
+        func setSelected(_ selected: Bool, animated: Bool) {
+            // Do not call super implementation to prevent highlighting
+        }
     }
     
 }

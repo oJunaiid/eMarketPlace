@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		071D4DEF29E6906C004AFDA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4DEE29E6906C004AFDA4 /* AppDelegate.swift */; };
-		071D4DF129E6906C004AFDA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4DF029E6906C004AFDA4 /* SceneDelegate.swift */; };
 		071D4DF329E6906C004AFDA4 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071D4DF229E6906C004AFDA4 /* HomeController.swift */; };
 		071D4DF629E6906C004AFDA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 071D4DF429E6906C004AFDA4 /* Main.storyboard */; };
 		071D4DF829E6906E004AFDA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 071D4DF729E6906E004AFDA4 /* Assets.xcassets */; };
@@ -42,7 +41,6 @@
 /* Begin PBXFileReference section */
 		071D4DEB29E6906C004AFDA4 /* eSewaMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eSewaMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		071D4DEE29E6906C004AFDA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		071D4DF029E6906C004AFDA4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		071D4DF229E6906C004AFDA4 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		071D4DF529E6906C004AFDA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		071D4DF729E6906E004AFDA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				071D4E6C29E7D13B004AFDA4 /* HOME */,
 				071D4E0529E6913F004AFDA4 /* API */,
 				071D4DEE29E6906C004AFDA4 /* AppDelegate.swift */,
-				071D4DF029E6906C004AFDA4 /* SceneDelegate.swift */,
 				071D4DF429E6906C004AFDA4 /* Main.storyboard */,
 				071D4DF729E6906E004AFDA4 /* Assets.xcassets */,
 				071D4DF929E6906E004AFDA4 /* LaunchScreen.storyboard */,
@@ -403,7 +400,6 @@
 				0773B3202A03723B00357A05 /* DescriptionTableViewCell.swift in Sources */,
 				0773B2E629FA279500357A05 /* ecomImage.swift in Sources */,
 				0773B2EE29FA5FB100357A05 /* AddToCartViewController.swift in Sources */,
-				071D4DF129E6906C004AFDA4 /* SceneDelegate.swift in Sources */,
 				071D4F7229F68AFC004AFDA4 /* AdBannerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

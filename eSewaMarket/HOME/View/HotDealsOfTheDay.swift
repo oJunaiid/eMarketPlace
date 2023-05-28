@@ -18,8 +18,8 @@ class HotDealsOfTheDay: UITableViewCell {
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 10
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 20
         layout.collectionView?.showsHorizontalScrollIndicator = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ class HotDealsOfTheDay: UITableViewCell {
     }
     
     func configure(with product: [ProductModel]) {
-        self.products = product.shuffled()
+        self.products = product.shuffled() 
         collectionView.reloadData()
     }
     
@@ -85,7 +85,7 @@ extension HotDealsOfTheDay: UICollectionViewDataSource {
 extension HotDealsOfTheDay: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 270)
+        return CGSize(width: 170, height: 255)
     }
     
 }
@@ -104,6 +104,8 @@ class HotCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        self.layer.cornerRadius = 15
+        
         contentView.addSubview(productImage)
         contentView.addSubview(name)
         contentView.addSubview(addButtonView)
@@ -111,21 +113,17 @@ class HotCell: UICollectionViewCell {
         contentView.addSubview(productPrice)
         contentView.addSubview(addToCart)
         contentView.addSubview(heartButton)
-        
-        contentView.layer.cornerRadius = 40
-        
-        
+                
         productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.contentMode = .scaleAspectFit // set the content mode to maintain aspect ratio
         
-        productImage.layer.cornerRadius = 20
         productImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             productImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             productImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: 0),
-            productImage.heightAnchor.constraint(equalToConstant: 140)
+            productImage.heightAnchor.constraint(equalToConstant: 130)
         ])
         
         name.font = UIFont.systemFont(ofSize: 14)
@@ -163,13 +161,13 @@ class HotCell: UICollectionViewCell {
         
         addButtonView.translatesAutoresizingMaskIntoConstraints = false
         addButtonView.backgroundColor = .black
-        addButtonView.layer.cornerRadius = 20
-        addButtonView.layer.maskedCorners = [.layerMinXMinYCorner]
+        addButtonView.layer.cornerRadius = 10
+        addButtonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
         
         NSLayoutConstraint.activate([
             addButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             addButtonView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            addButtonView.heightAnchor.constraint(equalToConstant: 50),
+            addButtonView.heightAnchor.constraint(equalToConstant: 40),
             addButtonView.widthAnchor.constraint(equalToConstant: 40)
         ])
         

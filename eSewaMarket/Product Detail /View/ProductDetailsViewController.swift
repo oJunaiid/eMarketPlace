@@ -34,10 +34,8 @@ class ProductDetails: UIViewController, ProductDescriptionProtocol {
         //  nav back button
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
-        //        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.tintColor = .black
-        // Add the back button to the navigation item
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
         navigationItem.title = "Product Detail"
@@ -47,9 +45,7 @@ class ProductDetails: UIViewController, ProductDescriptionProtocol {
         // Add to cart Navigation
         let cartButton = UIButton(type: .system)
         cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
-        //        cartButton.addTarget(self, action: #selector(cartTap), for: .touchUpInside)
         cartButton.tintColor = .black
-        //Adding the right button to navigation item
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         
         
