@@ -80,7 +80,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         
         cartButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         heartButton.addTarget(self, action: #selector(productdidTap), for: .touchUpInside)
-        menuButton.addTarget(self, action: #selector(menuDidTap), for: .touchUpInside)
     }
     
     func didFetchProducts(with products: [ProductModel]) {
@@ -201,10 +200,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func menuDidTap() {
-        let vc = KanyeViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
 extension HomeController: UITableViewDataSource {
