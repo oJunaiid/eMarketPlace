@@ -34,6 +34,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.showsVerticalScrollIndicator = false
         view.backgroundColor = .white
         setupViews()
         presenter = (HomePresenter(delegate: self))
@@ -122,7 +123,8 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         tableView.register(HotDealsOfTheDay.self, forCellReuseIdentifier: HotDealsOfTheDay.reuseIdentifier)
         tableView.register(ImageCell.self, forCellReuseIdentifier: ImageCell.reuseIdentifier)
         tableView.register(PopularBrand.self, forCellReuseIdentifier: PopularBrand.reuseIdentifier)
-        
+        tableView.register(RecommendedForYou.self, forCellReuseIdentifier: RecommendedForYou.reuseIdentifier)
+
         // Navigation Bar
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         view.addSubview(navBar)
@@ -189,7 +191,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: -5),
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 5),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -45)
         ])
         
@@ -209,7 +211,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
 
 extension HomeController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -218,9 +220,6 @@ extension HomeController: UITableViewDataSource {
     
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if section == 0 {
-            return nil
-        }
         let headerView = UIView()
         headerView.backgroundColor = UIColor(named: "color1")
         
@@ -244,12 +243,20 @@ extension HomeController: UITableViewDataSource {
             titleLabel.text = "Hot Deals Of TheDay"
         case 5:
             titleLabel.text = "Popular Brand"
+        case 6:
+            titleLabel.text = "Recommended For You"
         default:
             titleLabel.text = nil
         }
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if section == 0 || section == 4 {
+            view.isHidden = true
+            view.frame = .zero
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -317,21 +324,33 @@ extension HomeController: UITableViewDataSource {
             cell.backgroundColor = .clear
             return cell
             
+        case 6:
+            let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedForYou.reuseIdentifier, for: indexPath) as! RecommendedForYou
+            
+            cell.configure(with: self.products)
+            cell.itemClicked = { item in
+                let vc = ProductDetails()
+                vc.apiData = item
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            cell.backgroundColor = .clear
+            return cell
+            
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: PopularBrand.reuseIdentifier, for: indexPath) as! PopularBrand
+            let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedForYou.reuseIdentifier, for: indexPath) as! RecommendedForYou
             cell.backgroundColor = .clear
             cell.configure(with: self.products)
             return cell
         }
     }
-    
-    func addToCart(_ product: ProductModel) {
-        let vc = AddToCartViewController()
-        vc.selectedProduct = product
-        present(vc, animated: true, completion: nil)
-        
-    }
-    
+//
+//    func addToCart(_ product: ProductModel) {
+//        let vc = AddToCartViewController()
+//        vc.selectedProduct = product
+//        present(vc, animated: true, completion: nil)
+//
+//    }
+//
     
 }
 extension HomeController: UITableViewDelegate {

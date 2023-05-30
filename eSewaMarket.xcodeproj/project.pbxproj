@@ -34,6 +34,7 @@
 		0773B35E2A07A94700357A05 /* ProductDescriptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B35D2A07A94700357A05 /* ProductDescriptionPresenter.swift */; };
 		0773B3642A0E45FC00357A05 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B3632A0E45FC00357A05 /* Api.swift */; };
 		0773B3672A1B502900357A05 /* roughFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0773B3662A1B502900357A05 /* roughFile.swift */; };
+		07AB41B12A25E2BE0014EF27 /* RecommendedForYou.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AB41B02A25E2BE0014EF27 /* RecommendedForYou.swift */; };
 		62E20DFA7245835A64221E5C /* Pods_eSewaMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFC6894215CBCE1F7E35BAB /* Pods_eSewaMarket.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		0773B35D2A07A94700357A05 /* ProductDescriptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionPresenter.swift; sourceTree = "<group>"; };
 		0773B3632A0E45FC00357A05 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		0773B3662A1B502900357A05 /* roughFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roughFile.swift; sourceTree = "<group>"; };
+		07AB41B02A25E2BE0014EF27 /* RecommendedForYou.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedForYou.swift; sourceTree = "<group>"; };
 		622DD658AC17B09844A5E1BF /* Pods-eSewaMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eSewaMarket.debug.xcconfig"; path = "Target Support Files/Pods-eSewaMarket/Pods-eSewaMarket.debug.xcconfig"; sourceTree = "<group>"; };
 		63653DBEB0F562A1AC6E6C67 /* Pods-eSewaMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eSewaMarket.release.xcconfig"; path = "Target Support Files/Pods-eSewaMarket/Pods-eSewaMarket.release.xcconfig"; sourceTree = "<group>"; };
 		EBFC6894215CBCE1F7E35BAB /* Pods_eSewaMarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eSewaMarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				0773B2E129F7BEA400357A05 /* HotDealsOfTheDay.swift */,
 				0773B2E529FA279500357A05 /* ecomImage.swift */,
 				0773B2E329F7BECA00357A05 /* PopularBrand.swift */,
+				07AB41B02A25E2BE0014EF27 /* RecommendedForYou.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				0773B3572A07765500357A05 /* AddToCartPresenter.swift in Sources */,
 				0773B3642A0E45FC00357A05 /* Api.swift in Sources */,
 				0773B3222A03B1DF00357A05 /* AddCartModel.swift in Sources */,
+				07AB41B12A25E2BE0014EF27 /* RecommendedForYou.swift in Sources */,
 				0773B3152A02109500357A05 /* ProductDetailsViewController.swift in Sources */,
 				0773B3672A1B502900357A05 /* roughFile.swift in Sources */,
 				0773B2E429F7BECA00357A05 /* PopularBrand.swift in Sources */,

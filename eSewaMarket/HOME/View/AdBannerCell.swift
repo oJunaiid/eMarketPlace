@@ -101,7 +101,7 @@ extension AdBannerCell: UICollectionViewDataSource {
 class AdCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "banner3"))
+        let imageView = UIImageView(image: UIImage(named: "banner2"))
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
@@ -121,7 +121,6 @@ class AdCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
-//            imageView.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
     required init?(coder: NSCoder) {

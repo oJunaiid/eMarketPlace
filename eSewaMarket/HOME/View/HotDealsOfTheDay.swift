@@ -46,7 +46,7 @@ class HotDealsOfTheDay: UITableViewCell {
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 250),
+            collectionView.heightAnchor.constraint(equalToConstant: 275),
             collectionView.widthAnchor.constraint(equalToConstant: 100)
         ])
         
@@ -95,7 +95,12 @@ func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPat
 extension HotDealsOfTheDay: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 255)
+        let padding: CGFloat = 8
+           let numberOfItemsPerRow: CGFloat = 2
+           let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
+           let itemWidth = availableWidth / numberOfItemsPerRow
+           
+           return CGSize(width: itemWidth, height: 255)
     }
     
 }

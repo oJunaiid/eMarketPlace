@@ -19,13 +19,14 @@ class PopularBrand: UITableViewCell {
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 20
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 0
         layout.collectionView?.showsHorizontalScrollIndicator = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemPink
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
 
         return collectionView
     }()
@@ -41,10 +42,10 @@ override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     
             NSLayoutConstraint.activate([
                collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-               collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+               collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
                collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
                collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-               collectionView.heightAnchor.constraint(equalToConstant: 275),
+               collectionView.heightAnchor.constraint(equalToConstant: 525),
                collectionView.widthAnchor.constraint(equalToConstant: 100)
            ])
     
@@ -94,7 +95,13 @@ extension PopularBrand: UICollectionViewDataSource {
 extension PopularBrand: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 255)
+        
+        let padding: CGFloat = 3
+           let numberOfItemsPerRow: CGFloat = 2
+           let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
+           let itemWidth = availableWidth / numberOfItemsPerRow
+           
+           return CGSize(width: itemWidth, height: 255)
     }
 }
 

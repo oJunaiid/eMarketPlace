@@ -23,7 +23,6 @@ class CategoriesSection: UITableViewCell, UICollectionViewDelegate {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemPink
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -44,7 +43,7 @@ class CategoriesSection: UITableViewCell, UICollectionViewDelegate {
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 80),
+            collectionView.heightAnchor.constraint(equalToConstant: 100),
             collectionView.widthAnchor.constraint(equalToConstant: 100)
         ])
         
@@ -90,20 +89,19 @@ extension CategoriesSection: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 80, height: 90)
+        let item = category?[indexPath.row]
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = item?.category // or any other label text you want to calculate the width for
+        
+        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: 80))
+        let calculateLabelWidth = labelSize.width
+        
+        return CGSize(width: calculateLabelWidth, height: 80)
     }
     
 }
 
-//func calculateLabelWidth(for data: String) -> CGFloat {
-//    let label = UILabel()
-//    label.text = data // Use the passed data as the label's text
-//    label.font = UIFont.boldSystemFont(ofSize: 10)
-//
-//    let labelSize = label.intrinsicContentSize
-//
-//    return labelSize.width
-//}
 class CategoriesCell: UICollectionViewCell {
     
     let label = UILabel()
@@ -114,7 +112,7 @@ class CategoriesCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         
         
@@ -123,17 +121,7 @@ class CategoriesCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 10)
         contentView.addSubview(label)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
-        ])
-        
-        
         categoryImage = UIImage(systemName: "iphone")!
-        
         imageView.image = categoryImage
         imageView.tintColor = .black
         imageView.backgroundColor = UIColor(named: "Color")
@@ -141,20 +129,25 @@ class CategoriesCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 50),
-            imageView.heightAnchor.constraint(equalToConstant: 50)
+            imageView.widthAnchor.constraint(equalToConstant: 40),
+            imageView.heightAnchor.constraint(equalToConstant: 40),
+            
+            label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }
     
     func configure(with category: CategorieModel) {
         label.text = category.category
         imageView.image = category.imageName
-
-        }
         
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

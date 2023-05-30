@@ -3,7 +3,6 @@
 //  eSewaMarket
 //
 //  Created by Omar  on 4/27/23.
-
 import UIKit
 
 class ImageCell: UITableViewCell {
@@ -28,25 +27,32 @@ class ImageCell: UITableViewCell {
     private func setupSubviews() {
         contentView.addSubview(cellImageView)
         
-        // Add Auto Layout constraints for the image view
         NSLayoutConstraint.activate([
-            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            cellImageView.heightAnchor.constraint(equalToConstant: 150)
+            contentView.heightAnchor.constraint(equalToConstant: 190),
+            
+            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -10),
+            cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            cellImageView.heightAnchor.constraint(equalToConstant: 110)
         ])
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        cellImageView.layer.cornerRadius = 30
+        cellImageView.clipsToBounds = true
     }
     
     func configure(with image: UIImage?) {
         if let image = image {
             cellImageView.image = image
         } else {
-            // Handle the case where the image is nil
             cellImageView.image = UIImage(named: "ecom")
         }
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
-          // Do not call super implementation to prevent highlighting
-      }
+        // Do not call super implementation to prevent highlighting
+    }
 }
