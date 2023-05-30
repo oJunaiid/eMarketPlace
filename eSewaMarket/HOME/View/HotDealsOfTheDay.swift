@@ -16,6 +16,9 @@ class HotDealsOfTheDay: UITableViewCell {
     
     var products: [ProductModel]?
     
+    var itemClicked: ((ProductModel) -> ())?
+
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -73,15 +76,22 @@ extension HotDealsOfTheDay: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! HotCell
         
-        let product = products?[indexPath.row]
-        if let product = product {
+        if let product = products?[indexPath.row] {
             cell.configure(with: product)
         }
         
         return cell
     }
-}
 
+
+func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let item = products?[indexPath.row]
+    if let item = item {
+        self.itemClicked?(item)
+    }
+    
+}
+}
 extension HotDealsOfTheDay: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -185,8 +195,9 @@ class HotCell: UICollectionViewCell {
         addToCart.tintColor = .white
         
         NSLayoutConstraint.activate([
-            addToCart.topAnchor.constraint(equalTo: productPrice.bottomAnchor, constant: 5),
-            addToCart.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            addToCart.centerXAnchor.constraint(equalTo: addButtonView.centerXAnchor),
+            addToCart.centerYAnchor.constraint(equalTo: addButtonView.centerYAnchor),
+            
         ])
         
         
@@ -194,7 +205,7 @@ class HotCell: UICollectionViewCell {
     
     func configure(with product: ProductModel) {
         name.text = product.title
-        productPrice.text = "¥\(product.price ?? 00)"
+        productPrice.text = "$\(product.price ?? 00)"
         categoryLine.text = product.category
         
         if let url = URL(string: product.image ?? "t") {

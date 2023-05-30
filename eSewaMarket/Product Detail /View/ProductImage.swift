@@ -22,7 +22,7 @@ class ProductImage: UITableViewCell {
     }()
      let productImage: UIImageView = {
         let image = UIImageView(image: UIImage(named: ""))
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         
         return image
@@ -50,14 +50,18 @@ override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         productImage.heightAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1.1),
         productImage.widthAnchor.constraint(equalTo: containerView.widthAnchor)
         
-        
-
     ])
     
 }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with products: ProductModel) {
+        if let url = URL(string: products.image ?? "") {
+            productImage.kf.setImage(with: url)
+        }
     }
 }
 

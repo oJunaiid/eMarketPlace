@@ -14,6 +14,8 @@ class PopularBrand: UITableViewCell {
     static let reuseIdentifier = "PopularBrand"
 
     var products: [ProductModel]?
+    
+    var itemClicked: ((ProductModel) -> ())?
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -70,20 +72,25 @@ extension PopularBrand: UICollectionViewDataSource {
         return products?.count ?? 0
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Do nothing
+        let item = products?[indexPath.row]
+        if let item = item {
+            self.itemClicked?(item)
+        }
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PopularCell
         
-        let product = products?[indexPath.row]
-        if let product = product {
+        if let product = products?[indexPath.row] {
             cell.configure(with: product)
         }
-               return cell
-           }
+        
+        return cell
     }
-    
+}
+
+
 extension PopularBrand: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -191,8 +198,8 @@ class PopularCell: UICollectionViewCell {
         
         
         NSLayoutConstraint.activate([
-            addToCart.topAnchor.constraint(equalTo: productPrice.bottomAnchor, constant: 5),
-            addToCart.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            addToCart.centerXAnchor.constraint(equalTo: addButtonView.centerXAnchor),
+            addToCart.centerYAnchor.constraint(equalTo: addButtonView.centerYAnchor),
         ])
         
 
@@ -200,7 +207,7 @@ class PopularCell: UICollectionViewCell {
     
     func configure(with product: ProductModel) {
         name.text = product.title
-        productPrice.text = "Rs.\(product.price ?? 00)"
+        productPrice.text = "$\(product.price ?? 00)"
         categoryLine.text = product.category
 
         if let url = URL(string: product.image ?? "t") {

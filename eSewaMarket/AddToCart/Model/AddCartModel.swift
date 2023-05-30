@@ -5,16 +5,16 @@
 //  Created by Omar  on 5/4/23.
 //
 
-import Foundation
-import UIKit
-
-struct AddCartModel {
-    var itemName: String?
-    var itemDesc: String?
-    var itemPrice: Double?
-    var itemImage: UIImage?
-    var totalItemCount: Int?
-}
+//import Foundation
+//import UIKit
+//
+//struct AddCartModel {
+//    var itemName: String?
+//    var itemDesc: String?
+//    var itemPrice: Double?
+//    var itemImage: UIImage?
+//    var totalItemCount: Int?
+//}
 
 
 //    init(json: JSON) {

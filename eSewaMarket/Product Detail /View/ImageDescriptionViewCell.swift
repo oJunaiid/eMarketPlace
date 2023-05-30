@@ -27,7 +27,7 @@ class ImageDescriptionViewCell: UITableViewCell {
             title.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
             title.textColor = .black
             title.translatesAutoresizingMaskIntoConstraints = false
-             title.numberOfLines = 2 
+//             title.numberOfLines = 3
             return title
     }()
      let priceLabel: UILabel = {
@@ -97,6 +97,11 @@ class ImageDescriptionViewCell: UITableViewCell {
       }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with products: ProductModel) {
+        descriptionLabel.text = products.title
+        priceLabel.text = "$\(products.price ?? 00)"
     }
 }
 

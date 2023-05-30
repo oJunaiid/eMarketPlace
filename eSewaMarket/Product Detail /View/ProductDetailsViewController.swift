@@ -7,9 +7,11 @@
 
 import UIKit
 
-class ProductDetails: UIViewController, ProductDescriptionProtocol {
+class ProductDetails: UIViewController  {
     
-    var presenter: ProductInfoPresenter!
+    //    var presenter: ProductInfoPresenter!
+    
+    var apiData: ProductModel?
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -24,10 +26,6 @@ class ProductDetails: UIViewController, ProductDescriptionProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = ProductInfoPresenter(view: self, delegate: self)
-        
-        presenter.populateDescriptionView()
-        
         setupTableView()
         
         
@@ -41,7 +39,7 @@ class ProductDetails: UIViewController, ProductDescriptionProtocol {
         navigationItem.title = "Product Detail"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]
         
-
+        
         // Add to cart Navigation
         let cartButton = UIButton(type: .system)
         cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
@@ -57,30 +55,32 @@ class ProductDetails: UIViewController, ProductDescriptionProtocol {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.backgroundColor = .white
+        
+        //        tableView.separatorStyle = .none
+        
         //        tableView.frame = view.bounds
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
         ])
         
         
     }
     
-    func displayProductDescription(model: [ProductDescriptionModel]) {
-        tableView.reloadData()
-    }
+    //    func displayProductDescription(model: [ProductDescriptionModel]) {
+    //        tableView.reloadData()
+    //    }
+    
     private func setupTableView() {
         
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
-        // pin the table view to the vc's root view
+        
     }
     
     @objc func backTapped() {
@@ -113,7 +113,7 @@ extension ProductDetails: UITableViewDataSource {
         case 1:
             return 110
         case 2:
-            return UITableView.automaticDimension
+            return 100
         default:
             return 0
         }
@@ -153,22 +153,25 @@ extension ProductDetails: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductImage.reuseIdentifier, for: indexPath) as! ProductImage
-            let product = presenter?.description.first
-            cell.productImage.image = product?.itemImage
+
+            if let apiData = apiData {
+                cell.configure(with: apiData)
+            }
             return cell
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: ImageDescriptionViewCell.reuseIdentifier, for: indexPath) as! ImageDescriptionViewCell
-            let product = presenter?.description.first
-            cell.descriptionLabel.text = product?.itemName
-            cell.priceLabel.text = String(format: "$.%.2f", product?.itemPrice ?? 0.0)
+        
+            if let apiData = apiData {
+                cell.configure(with: apiData)
+            }
             return cell
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: DescriptionTableViewCell.reuseIdentifier, for: indexPath) as! DescriptionTableViewCell
-            let productDescriptions = presenter?.description ?? []
-            productDescriptions.forEach { description in
-                cell.addRandomDescription()
+       
+            if let featuredData = apiData {
+                cell.configure(with: featuredData)
             }
             return cell
             

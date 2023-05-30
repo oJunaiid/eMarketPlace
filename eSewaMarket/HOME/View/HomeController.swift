@@ -14,6 +14,22 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
     var categories: [CategorieModel]?
     let tableView = UITableView()
     let searchController = UISearchController(searchResultsController: nil)
+    let addToCartVC = AddToCartViewController()
+    
+    
+    let footer = UIView()
+    let homeButton = UIButton()
+    let cartButton = UIButton()
+    let heartButton = UIButton()
+    let bottomMenuButton = UIButton()
+    
+    let logoImage = UIImageView(image: UIImage(named: "eMarket"))
+    let bellButton = UIButton()
+    let menuButton = UIButton()
+    let helloText = UILabel()
+    
+    let searchBar = UISearchBar(frame: CGRect(x: 0, y: 120, width: 200, height: 44))
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,38 +42,33 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         Cpresenter?.populateDescriptionView()
         // presenter?.fetchC()
         
-        let footer = UIView()
         footer.backgroundColor = .lightGray
         footer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(footer)
         
-        let homeButton = UIButton()
         homeButton.setImage(UIImage(systemName: "house"), for: .normal)
         homeButton.setTitleColor(.black, for: .normal)
         homeButton.tintColor = .white
         homeButton.translatesAutoresizingMaskIntoConstraints = false
         footer.addSubview(homeButton)
         
-        let cartButton = UIButton()
         cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
         cartButton.setTitleColor(.black, for: .normal)
         cartButton.tintColor = .white
         cartButton.translatesAutoresizingMaskIntoConstraints = false
         footer.addSubview(cartButton)
         
-        let heartButton = UIButton()
         heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         heartButton.tintColor = .white
         heartButton.setTitleColor(.black, for: .normal)
         heartButton.translatesAutoresizingMaskIntoConstraints = false
         footer.addSubview(heartButton)
         
-        let menuButton = UIButton()
-        menuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        menuButton.setTitleColor(.black, for: .normal)
-        menuButton.tintColor = .white
-        menuButton.translatesAutoresizingMaskIntoConstraints = false
-        footer.addSubview(menuButton)
+        bottomMenuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        bottomMenuButton.setTitleColor(.black, for: .normal)
+        bottomMenuButton.tintColor = .white
+        bottomMenuButton.translatesAutoresizingMaskIntoConstraints = false
+        footer.addSubview(bottomMenuButton)
         
         NSLayoutConstraint.activate([
             footer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -74,8 +85,8 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
             heartButton.leadingAnchor.constraint(equalTo: cartButton.trailingAnchor, constant: 100),
             heartButton.centerYAnchor.constraint(equalTo: footer.centerYAnchor),
             
-            menuButton.trailingAnchor.constraint(equalTo: footer.trailingAnchor, constant: -20),
-            menuButton.centerYAnchor.constraint(equalTo: footer.centerYAnchor)
+            bottomMenuButton.trailingAnchor.constraint(equalTo: footer.trailingAnchor, constant: -20),
+            bottomMenuButton.centerYAnchor.constraint(equalTo: footer.centerYAnchor)
         ])
         
         cartButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
@@ -100,6 +111,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
     
     private func setupViews() {
         view.addSubview(tableView)
+        tableView.backgroundColor = UIColor(named: "color1")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -115,8 +127,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         view.addSubview(navBar)
         
-        // Add logo image to navigation bar
-        let logoImage = UIImageView(image: UIImage(named: "eMarket"))
         logoImage.contentMode = .scaleAspectFit
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         navBar.addSubview(logoImage)
@@ -128,7 +138,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
             logoImage.widthAnchor.constraint(equalToConstant: 180)
         ])
         
-        let bellButton = UIButton()
         bellButton.setImage(UIImage(systemName: "bell"), for: .normal)
         bellButton.tintColor = .black
         bellButton.translatesAutoresizingMaskIntoConstraints = false
@@ -139,7 +148,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
             bellButton.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 10),
         ])
         
-        let menuButton = UIButton()
         menuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         menuButton.tintColor = .black
         menuButton.translatesAutoresizingMaskIntoConstraints = false
@@ -151,7 +159,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
             
         ])
         
-        let helloText = UILabel()
         helloText.text = "Hello Kiran, everything you will discover here"
         helloText.numberOfLines = 1;
         helloText.adjustsFontSizeToFitWidth = true
@@ -165,7 +172,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
             helloText.heightAnchor.constraint(equalToConstant: 15)
         ])
         
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 120, width: 200, height: 44))
         searchBar.placeholder = "Search For Everything Here"
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         navBar.addSubview(searchBar)
@@ -186,7 +192,6 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: -5),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -45)
         ])
-        tableView.backgroundColor = UIColor(named: "Color")
         
     }
     
@@ -214,10 +219,10 @@ extension HomeController: UITableViewDataSource {
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-               return nil
-           }
+            return nil
+        }
         let headerView = UIView()
-        headerView.backgroundColor = UIColor(named: "Color")
+        headerView.backgroundColor = UIColor(named: "color1")
         
         let titleLabel = UILabel()
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
@@ -231,8 +236,6 @@ extension HomeController: UITableViewDataSource {
         ])
         
         switch section {
-        case 0:
-            titleLabel.text = "" 
         case 1:
             titleLabel.text = "Categories"
         case 2:
@@ -261,13 +264,25 @@ extension HomeController: UITableViewDataSource {
                 cell.configure(with: products)
                 cell.backgroundColor = .clear
             }
-       
+            
             return cell
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: FeaturedProducts.reuseIdentifier, for: indexPath) as! FeaturedProducts
-            cell.backgroundColor = .clear
             cell.configure(with: self.products)
+            cell.itemClicked = { item in
+                let vc = ProductDetails()
+                vc.apiData = item
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            cell.addedToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.addToCartVC.selectedProduct = item
+                strongSelf.navigationController?.pushViewController(strongSelf.addToCartVC, animated: true)
+            }
+            
+            cell.backgroundColor = .clear
             
             return cell
             
@@ -275,6 +290,11 @@ extension HomeController: UITableViewDataSource {
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: HotDealsOfTheDay.reuseIdentifier, for: indexPath) as! HotDealsOfTheDay
             cell.configure(with: self.products)
+            cell.itemClicked = { item in
+                let vc = ProductDetails()
+                vc.apiData = item
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             cell.backgroundColor = .clear
             return cell
             
@@ -287,8 +307,14 @@ extension HomeController: UITableViewDataSource {
             
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: PopularBrand.reuseIdentifier, for: indexPath) as! PopularBrand
-            cell.backgroundColor = .clear
+            
             cell.configure(with: self.products)
+            cell.itemClicked = { item in
+                let vc = ProductDetails()
+                vc.apiData = item
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            cell.backgroundColor = .clear
             return cell
             
         default:
@@ -297,6 +323,13 @@ extension HomeController: UITableViewDataSource {
             cell.configure(with: self.products)
             return cell
         }
+    }
+    
+    func addToCart(_ product: ProductModel) {
+        let vc = AddToCartViewController()
+        vc.selectedProduct = product
+        present(vc, animated: true, completion: nil)
+        
     }
     
     
