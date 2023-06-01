@@ -12,11 +12,13 @@ class RecommendedForYou: UITableViewCell {
     private let cellReuseIdentifier = "RecommendedForYou"
     
     static let reuseIdentifier = "RecommendedForYou"
-
+    
     var products: [ProductModel]?
     
     var itemClicked: ((ProductModel) -> ())?
-
+    var addedToCart: ((ProductModel) -> Void)?
+    
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -27,37 +29,37 @@ class RecommendedForYou: UITableViewCell {
         collectionView.backgroundColor = .systemPink
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = false
-
+        
         return collectionView
     }()
     
-override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
-    contentView.addSubview(collectionView)
-    setupCollectionView()
-    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(collectionView)
+        setupCollectionView()
+        
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 1050),
+            collectionView.widthAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        collectionView.register(RecommendedCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        
+    }
     
-            NSLayoutConstraint.activate([
-               collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-               collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-               collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
-               collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-               collectionView.heightAnchor.constraint(equalToConstant: 1050),
-               collectionView.widthAnchor.constraint(equalToConstant: 100)
-           ])
-    
-    collectionView.register(RecommendedCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-    
-        }
-
     func configure(with product: [ProductModel]) {
         self.products = product.shuffled()
         collectionView.reloadData()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -71,7 +73,7 @@ extension RecommendedForYou: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return products?.count ?? 0
-        }
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = products?[indexPath.row]
         if let item = item {
@@ -79,29 +81,31 @@ extension RecommendedForYou: UICollectionViewDataSource {
         }
         
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! RecommendedCell
         
         if let product = products?[indexPath.row] {
             cell.configure(with: product)
         }
-        
+        cell.addedToCart = { [weak self] product in
+            self?.addedToCart?(product)
+        }
         return cell
     }
 }
 
 
 extension RecommendedForYou: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let padding: CGFloat = 3
-           let numberOfItemsPerRow: CGFloat = 2
-           let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
-           let itemWidth = availableWidth / numberOfItemsPerRow
-           
-           return CGSize(width: itemWidth, height: 255)
+        let numberOfItemsPerRow: CGFloat = 2
+        let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
+        let itemWidth = availableWidth / numberOfItemsPerRow
+        
+        return CGSize(width: itemWidth, height: 255)
     }
 }
 
@@ -115,7 +119,8 @@ class RecommendedCell: UICollectionViewCell {
     let likeButton = UIButton()
     let addButtonView = UIView()
     let addToCart = UIButton()
-    
+    var addedToCart: ((ProductModel) -> Void)?
+    var product: ProductModel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -128,13 +133,13 @@ class RecommendedCell: UICollectionViewCell {
         contentView.addSubview(addButtonView)
         contentView.addSubview(categoryLine)
         contentView.addSubview(addToCart)
-
+        
         productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.contentMode = .scaleAspectFit
         
         productImage.translatesAutoresizingMaskIntoConstraints = false
-       
-
+        
+        
         NSLayoutConstraint.activate([
             productImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             productImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -146,14 +151,14 @@ class RecommendedCell: UICollectionViewCell {
         name.font = UIFont.systemFont(ofSize: 14)
         name.numberOfLines = 1
         
-  
+        
         name.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             name.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 4),
             name.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             name.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 4)
-
+            
         ])
         
         categoryLine.text = "IN STOCK - NOTHING"
@@ -167,7 +172,7 @@ class RecommendedCell: UICollectionViewCell {
             
         ])
         
-//        productPrice.text = "Rs. 70,000"
+        //        productPrice.text = "Rs. 70,000"
         productPrice.textColor = .black
         productPrice.font = UIFont.systemFont(ofSize: 14)
         productPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -209,14 +214,26 @@ class RecommendedCell: UICollectionViewCell {
             addToCart.centerYAnchor.constraint(equalTo: addButtonView.centerYAnchor),
         ])
         
-
+        
+        addToCart.addTarget(self, action: #selector(addToCartButton), for: .touchUpInside)
+        
+    }
+    
+    @objc func addToCartButton() {
+        guard let product = product else {
+            return
+        }
+        
+        addedToCart?(product)
+        
     }
     
     func configure(with product: ProductModel) {
+        self.product = product
         name.text = product.title
         productPrice.text = "$\(product.price ?? 00)"
         categoryLine.text = product.category
-
+        
         if let url = URL(string: product.image ?? "t") {
             productImage.kf.setImage(with: url)
         }

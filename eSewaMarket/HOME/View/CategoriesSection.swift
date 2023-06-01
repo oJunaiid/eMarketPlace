@@ -92,7 +92,7 @@ extension CategoriesSection: UICollectionViewDelegateFlowLayout {
         let item = category?[indexPath.row]
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = item?.category // or any other label text you want to calculate the width for
+        label.text = item?.category
         
         let labelSize = label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: 80))
         let calculateLabelWidth = labelSize.width

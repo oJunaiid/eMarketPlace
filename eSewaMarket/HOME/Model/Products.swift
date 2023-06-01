@@ -14,7 +14,8 @@ class ProductModel {
     var category: String?
     var description: String?
     var image: String?
-
+    var count: Int = 1 
+    
     var rating: Rating?
 
     init(title: String?, price: Double?, category: String?, image: String?, description: String?) {

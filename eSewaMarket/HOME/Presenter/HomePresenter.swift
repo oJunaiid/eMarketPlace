@@ -55,7 +55,7 @@ class HomePresenter {
 
 class categoryClass {
     
-    var label = [CategorieModel(category: "electronics", imageName: UIImage(systemName: "iphone")), CategorieModel(category: "jewelery", imageName: UIImage(systemName: "mappin")), CategorieModel(category: "men's clothing", imageName: UIImage(systemName: "tshirt")), CategorieModel(category: "women's clothing", imageName: UIImage(systemName: "person.fill"))]
+    var label = [CategorieModel(category: "electronics", imageName: UIImage(systemName: "iphone")), CategorieModel(category: "jewelery", imageName: UIImage(systemName: "tray.fill")), CategorieModel(category: "men's clothing", imageName: UIImage(systemName: "tshirt")), CategorieModel(category: "women's clothing", imageName: UIImage(systemName: "person.fill"))]
     
     weak var delegate: HomePresenterProtocol?
     
@@ -71,47 +71,3 @@ class categoryClass {
     }
 }
 
-
-
-
-
-
-//    func fetch() {
-//        fetchProducts() { [weak self] result in
-//            switch result {
-//            case .success(let products):
-//
-//                self?.delegate?.didFetchModel(with: products)
-//            case .failure(let error):
-//                self?.delegate?.showError(error.localizedDescription)
-//            }
-//        }
-//
-//    }
-//
-//    func fetchProducts(completion: @escaping (Result<[ProductModel], AFError>) -> Void) {
-//        let url = "\(baseURL)products"
-//        AF.request(url).validate().responseDecodable(of: [ProductModel].self) { response in
-//            switch response.result {
-//            case .success(let products):
-//                completion(.success(products))
-//                self.delegate?.didFetchModel(with: products)
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-//}
-
-
-//class BannerPresenter {
-//
-//    var items = [BannerImage(image: UIImage(named: "image1")), BannerImage(image: UIImage(named: "image2")), BannerImage(image: UIImage(named: "image3")), BannerImage(image: UIImage(named: "image4"))]
-//
-//    weak var view: HomeController?
-//
-//    init(view: HomeController) {
-//        self.view = view
-//
-//    }
-//}

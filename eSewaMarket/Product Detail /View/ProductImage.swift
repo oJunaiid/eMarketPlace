@@ -34,6 +34,7 @@ override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     containerView.addSubview(productImage)
    
     contentView.backgroundColor = .white
+    productImage.backgroundColor = .clear
     
     NSLayoutConstraint.activate([
         

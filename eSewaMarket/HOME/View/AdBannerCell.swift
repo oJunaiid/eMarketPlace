@@ -61,7 +61,7 @@ class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 180)
+            collectionView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         // Register cell
@@ -80,7 +80,7 @@ class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
 extension AdBannerCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 350, height: 170)
+        return CGSize(width: 350, height: 140)
     }
     
 }

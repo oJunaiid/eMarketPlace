@@ -26,22 +26,22 @@ class ImageCell: UITableViewCell {
     
     private func setupSubviews() {
         contentView.addSubview(cellImageView)
-        
+//        contentView.clipsToBounds = true
+
         NSLayoutConstraint.activate([
-            contentView.heightAnchor.constraint(equalToConstant: 190),
+            contentView.heightAnchor.constraint(equalToConstant: 150),
             
-            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -10),
             cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -10),
-            cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            cellImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 10),
             cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            cellImageView.heightAnchor.constraint(equalToConstant: 110)
+            cellImageView.heightAnchor.constraint(equalToConstant: 140)
         ])
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         cellImageView.layer.cornerRadius = 30
-        cellImageView.clipsToBounds = true
     }
     
     func configure(with image: UIImage?) {

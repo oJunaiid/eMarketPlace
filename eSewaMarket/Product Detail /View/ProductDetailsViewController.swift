@@ -13,24 +13,56 @@ class ProductDetails: UIViewController  {
     
     var apiData: ProductModel?
     
-    private let tableView: UITableView = {
-        let table = UITableView()
-        
-        table.register(ProductImage.self, forCellReuseIdentifier: ProductImage.reuseIdentifier)
-        table.register(ImageDescriptionViewCell.self, forCellReuseIdentifier: ImageDescriptionViewCell.reuseIdentifier)
-        table.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.reuseIdentifier)
-        
-        return table
-    }()
+    
+    
+    let footer = UIView()
+    let checkOutLabel = UILabel()
+    let checkOutPrice = UILabel()
+    let checkOutButton = UIButton()
+    let backButton = UIButton(type: .system)
+    let cartButton = UIButton(type: .system)
+    let tableView = UITableView()
+
+//    var descriptionCell: ImageDescriptionViewCell?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
+        view.addSubview(tableView)
+        view.addSubview(footer)
+        footer.addSubview(checkOutLabel)
+        footer.addSubview(checkOutPrice)
+        footer.addSubview(checkOutButton)
         
+        view.backgroundColor = .clear
+        
+        tableView.backgroundColor = UIColor(named: "color1")
+        tableView.delegate = self
+        tableView.dataSource = self
+//        tableView.clipsToBounds = true
+        tableView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height - 70)
+
+        
+        checkOutLabel.text = "Checkout Total"
+        checkOutLabel.textColor = .black
+        checkOutLabel.font = .systemFont(ofSize: 16)
+        
+        footer.backgroundColor = .white
+        
+        checkOutPrice.text = "$1000"
+        checkOutPrice.textColor = .black
+        checkOutPrice.font = .systemFont(ofSize: 14)
+        
+        
+        checkOutButton.setTitle("ADD TO CART", for: .normal)
+        checkOutButton.backgroundColor = .black
+        checkOutButton.tintColor = .white
+        checkOutButton.layer.cornerRadius = 10
         
         //  nav back button
-        let backButton = UIButton(type: .system)
+        
         backButton.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.tintColor = .black
@@ -40,47 +72,62 @@ class ProductDetails: UIViewController  {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]
         
         
-        // Add to cart Navigation
-        let cartButton = UIButton(type: .system)
+        
         cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
         cartButton.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         
-        
+//        tableView.clipsToBounds = true
+//        tableView.bounds.size.height -= 80
+
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         
-        //        tableView.register(ProductImage.self, forCellReuseIdentifier: ProductImage.identifier)
-        
-    }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.backgroundColor = .white
-        
-        //        tableView.separatorStyle = .none
-        
-        //        tableView.frame = view.bounds
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+        footer.translatesAutoresizingMaskIntoConstraints = false
+        checkOutLabel.translatesAutoresizingMaskIntoConstraints = false
+        checkOutButton.translatesAutoresizingMaskIntoConstraints = false
+        checkOutPrice.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+//            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+////            tableView.heightAnchor.constraint(equalToConstant: 500),
+//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
+            
+            footer.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 0),
+            footer.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
+            footer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            footer.heightAnchor.constraint(equalToConstant: 60),
+            
+            checkOutLabel.topAnchor.constraint(equalTo: footer.topAnchor, constant: 10),
+            checkOutLabel.leadingAnchor.constraint(equalTo: footer.leadingAnchor, constant: 20),
+            
+            checkOutPrice.topAnchor.constraint(equalTo: checkOutLabel.bottomAnchor, constant: 5),
+            checkOutPrice.leadingAnchor.constraint(equalTo: footer.leadingAnchor, constant: 20),
+            
+            checkOutButton.topAnchor.constraint(equalTo: footer.topAnchor, constant: 10),
+            checkOutButton.trailingAnchor.constraint(equalTo: footer.trailingAnchor, constant: -20),
+            checkOutButton.heightAnchor.constraint(equalToConstant: 30),
+            checkOutButton.widthAnchor.constraint(equalToConstant: 120),
         ])
         
         
+        tableView.register(ProductImage.self, forCellReuseIdentifier: ProductImage.reuseIdentifier)
+        tableView.register(ImageDescriptionViewCell.self, forCellReuseIdentifier: ImageDescriptionViewCell.reuseIdentifier)
+        tableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.reuseIdentifier)
+            
+        
     }
     
-    //    func displayProductDescription(model: [ProductDescriptionModel]) {
-    //        tableView.reloadData()
-    //    }
+    func configure(with products: ProductModel) {
+//        descriptionCell?.configure(with: products)
+        checkOutLabel.text = products.title
+        checkOutPrice.text = "$\(products.price ?? 0)"
+    }
     
     private func setupTableView() {
-        
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+
     }
     
     @objc func backTapped() {
@@ -105,15 +152,29 @@ extension ProductDetails: UITableViewDataSource {
         return 1
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        case 1:
+            return 0.0
+        case 2:
+            return UITableView.automaticDimension
+        default:
+            return  0.0
+            
+        }
+       
+    }
+//
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             return UITableView.automaticDimension
         case 1:
-            return 110
+            return 90
         case 2:
-            return 100
+            return 200
         default:
             return 0
         }
@@ -137,7 +198,6 @@ extension ProductDetails: UITableViewDataSource {
         switch section {
         case 0:
             titleLabel.text = nil
-            
         case 1:
             titleLabel.text = nil
         case 2:
@@ -149,6 +209,13 @@ extension ProductDetails: UITableViewDataSource {
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if section == 0 || section == 1 {
+            view.isHidden = true
+            view.frame = .zero
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -157,6 +224,7 @@ extension ProductDetails: UITableViewDataSource {
             if let apiData = apiData {
                 cell.configure(with: apiData)
             }
+            cell.backgroundColor = .clear
             return cell
             
         case 1:
@@ -165,6 +233,9 @@ extension ProductDetails: UITableViewDataSource {
             if let apiData = apiData {
                 cell.configure(with: apiData)
             }
+//            descriptionCell = cell
+
+            cell.backgroundColor = .clear
             return cell
             
         case 2:
@@ -173,6 +244,8 @@ extension ProductDetails: UITableViewDataSource {
             if let featuredData = apiData {
                 cell.configure(with: featuredData)
             }
+            cell.backgroundColor = .clear
+
             return cell
             
         default:

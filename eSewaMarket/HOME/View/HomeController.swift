@@ -91,7 +91,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         ])
         
         cartButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        heartButton.addTarget(self, action: #selector(productdidTap), for: .touchUpInside)
+        //        heartButton.addTarget(self, action: #selector(productdidTap), for: .touchUpInside)
     }
     
     func didFetchProducts(with products: [ProductModel]) {
@@ -124,7 +124,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         tableView.register(ImageCell.self, forCellReuseIdentifier: ImageCell.reuseIdentifier)
         tableView.register(PopularBrand.self, forCellReuseIdentifier: PopularBrand.reuseIdentifier)
         tableView.register(RecommendedForYou.self, forCellReuseIdentifier: RecommendedForYou.reuseIdentifier)
-
+        
         // Navigation Bar
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         view.addSubview(navBar)
@@ -191,21 +191,21 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 5),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -45)
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: -5),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -53)
         ])
         
     }
     
     @objc func didTapButton() {
-        let vc = AddToCartViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = AddToCartViewController()
+        self.navigationController?.pushViewController(addToCartVC, animated: true)
     }
     
-    @objc func productdidTap() {
-        let vc = ProductDetails()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+    //    @objc func productdidTap() {
+    //        let vc = ProductDetails()
+    //        self.navigationController?.pushViewController(vc, animated: true)
+    //    }
     
 }
 
@@ -257,6 +257,27 @@ extension HomeController: UITableViewDataSource {
             view.frame = .zero
         }
     }
+        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            switch section {
+            case 0:
+                return 0.0
+            case 1:
+                return UITableView.automaticDimension
+            case 2:
+                return UITableView.automaticDimension
+            case 3:
+                return UITableView.automaticDimension
+            case 4:
+                return 0.0
+            case 5:
+                return UITableView.automaticDimension
+            case 6:
+                return UITableView.automaticDimension
+            default:
+                return  0.0
+                
+            }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -302,6 +323,13 @@ extension HomeController: UITableViewDataSource {
                 vc.apiData = item
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            
+            cell.addedToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.addToCartVC.selectedProduct = item
+                strongSelf.navigationController?.pushViewController(strongSelf.addToCartVC, animated: true)
+            }
+            
             cell.backgroundColor = .clear
             return cell
             
@@ -321,6 +349,12 @@ extension HomeController: UITableViewDataSource {
                 vc.apiData = item
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            cell.addedToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.addToCartVC.selectedProduct = item
+                strongSelf.navigationController?.pushViewController(strongSelf.addToCartVC, animated: true)
+            }
+            
             cell.backgroundColor = .clear
             return cell
             
@@ -333,6 +367,12 @@ extension HomeController: UITableViewDataSource {
                 vc.apiData = item
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            cell.addedToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.addToCartVC.selectedProduct = item
+                strongSelf.navigationController?.pushViewController(strongSelf.addToCartVC, animated: true)
+            }
+            
             cell.backgroundColor = .clear
             return cell
             
@@ -343,14 +383,7 @@ extension HomeController: UITableViewDataSource {
             return cell
         }
     }
-//
-//    func addToCart(_ product: ProductModel) {
-//        let vc = AddToCartViewController()
-//        vc.selectedProduct = product
-//        present(vc, animated: true, completion: nil)
-//
-//    }
-//
+ 
     
 }
 extension HomeController: UITableViewDelegate {
@@ -359,8 +392,9 @@ extension HomeController: UITableViewDelegate {
             // Do not call super implementation to prevent highlighting
         }
     }
-    
+
 }
+
 extension AdBannerCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)

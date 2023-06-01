@@ -10,15 +10,10 @@ import UIKit
 import Kingfisher
 
 class AddToCartViewController: UIViewController {
-    
-    //    var items: [AddCartModel]?
-    
+        
     var cartItems = [ProductModel]()
     
     var selectedProduct: ProductModel?
-    
-    //    var presenter: AddCartItemPresenter!
-    
     
     let tableView: UITableView = {
         let table = UITableView()
@@ -60,9 +55,8 @@ class AddToCartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.allowsSelection = false
-        
-        
         navigationItem.title = "My Cart"
         
         // Create a back button
@@ -87,17 +81,27 @@ class AddToCartViewController: UIViewController {
         view.addSubview(footerView)
         view.addSubview(checkoutLabel)
         view.addSubview(checkoutButton)
-        view.addSubview(checkoutPrice)
+//        view.addSubview(checkoutPrice)
+        footerView.addSubview(checkoutPrice)
         
         
         tableView.delegate = self
         tableView .dataSource = self
         
+    
         tableView.translatesAutoresizingMaskIntoConstraints = false
         footerView.translatesAutoresizingMaskIntoConstraints = false
         checkoutLabel.translatesAutoresizingMaskIntoConstraints = false
         checkoutButton.translatesAutoresizingMaskIntoConstraints = false
         checkoutPrice.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+                tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+                           ])
         
         NSLayoutConstraint.activate([
             footerView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
@@ -122,18 +126,27 @@ class AddToCartViewController: UIViewController {
             checkoutButton.heightAnchor.constraint(equalToConstant: 40),
             checkoutButton.widthAnchor.constraint(equalToConstant: 140),
         ])
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            //            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            //            tableView.heightAnchor.constraint(equalToConstant: 712)
-        ])
+      
         
-        
-        
-        
+        displayTotalPrice()
+       
     }
+    
+    func calculateTotalPrice() -> Double {
+        var totalPrice: Double = 0
+        
+        for item in cartItems {
+            totalPrice += item.price ?? 0
+        }
+        
+        return totalPrice
+    }
+    
+    func displayTotalPrice() {
+        let totalPrice = calculateTotalPrice()
+        checkoutPrice.text = "$\(totalPrice)"
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -152,7 +165,7 @@ class AddToCartViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+//        tableView.frame = view.bounds
         tableView.backgroundColor = UIColor(named: "color1")
         tableView.separatorStyle = .none
         

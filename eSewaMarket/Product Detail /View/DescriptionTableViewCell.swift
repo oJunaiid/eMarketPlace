@@ -16,13 +16,13 @@ class DescriptionTableViewCell: UITableViewCell {
         let checkImage = UIImageView()
         checkImage.image = UIImage(systemName: "checkmark.circle.fill")
         checkImage.contentMode = .scaleAspectFit
-        checkImage.clipsToBounds = true
+//        checkImage.clipsToBounds = true
         checkImage.translatesAutoresizingMaskIntoConstraints = false
         checkImage.tintColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         return checkImage
     }()
     
-    let descriptionImage: UILabel = {
+    let descriptionLabel: UILabel = {
         let description = UILabel()
         description.translatesAutoresizingMaskIntoConstraints = false
         description.font = .systemFont(ofSize: 14, weight: .medium)
@@ -42,23 +42,23 @@ class DescriptionTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         contentView.backgroundColor = .clear
         self.addSubview(tickImage)
-        self.addSubview(descriptionImage)
+        self.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-
             tickImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             tickImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             tickImage.widthAnchor.constraint(equalToConstant: 20),
             tickImage.heightAnchor.constraint(equalToConstant: 20),
             
-            descriptionImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            descriptionImage.leadingAnchor.constraint(equalTo: tickImage.trailingAnchor, constant: 4),
-            descriptionImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            descriptionImage.widthAnchor.constraint(equalToConstant: 310),
+            descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: tickImage.trailingAnchor, constant: 4),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 310),
         ])
     }
     func configure(with model: ProductModel) {
-        descriptionImage.text = model.description
+        descriptionLabel.text = model.description
       }
     
     required init?(coder aDecoder: NSCoder) {

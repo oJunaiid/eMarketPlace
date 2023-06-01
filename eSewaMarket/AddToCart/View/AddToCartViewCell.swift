@@ -13,15 +13,6 @@ class AddToCartViewCell: UITableViewCell {
     
     static let identifier = "AddToCartViewCell"
     
-    //    var itemList: [AddCartModel]?
-    
-    
-    
-    //    func updatePriceLabel() {
-    //            let updatedPrice = calculatePrice(quantity: quantity)
-    //            productQuantityLabel.text = "$\(updatedPrice)"
-    //            countChanged?(Double(updatedPrice))
-    ////        }
     let containerView = UIView()
     
     var image: UIImageView = {
@@ -136,48 +127,31 @@ class AddToCartViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //    private var price: Double {
-    //        guard let priceText = priceLabel.text, let priceValue = Double(priceText) else {
-    //            return 0.0 // Default value in case the conversion fails or the label is empty
-    //        }
-    //        return priceValue
-    //    }
+     var price: Double = 64
+     var count: Int = 1
     
-    
-    private var price: Double = 3000.0
-    private var count: Int = 1
-    
-    
-    //    func updatedPrice() {
-    //
-    //        let totalPrice = price * Double(count)
-    //        priceLabel.text = String(format: "Rs.%.2f", totalPrice)
-    //        checkoutPrice?(totalPrice)
-    //    }
-    //
     func updatePriceAndCount() {
         quantityLabel.text = String(format: "%02d", count)
-        let totalPrice = price * Double(count)
-        priceLabel.text = String(format: "$%.2f", totalPrice)
+        
+//
+               let totalPrice = price * Double(count)
+               priceLabel.text = String(format: "$%.2f", totalPrice)
+//           } else {
+//               priceLabel.text = ""
+//           }
+//        let totalPrice = price * Double(count)
+//        priceLabel.text = String(format: "$%.2f", totalPrice)
     }
-    
-    //    func updatedPrice() {
-    //        let totalPrice = price * Double(count)
-    //        priceLabel.text = String(format: "Rs.%.2f", totalPrice)
-    //    }
-    
-    
+
     @objc func addButtonTapped() {
         count += 1
         updatePriceAndCount()
-        //        updatedPrice()
     }
     
     @objc func subtractButtonTapped() {
         if count > 1 {
             count -= 1
             updatePriceAndCount()
-            //            updatedPrice()
         }
     }
     
@@ -186,7 +160,6 @@ class AddToCartViewCell: UITableViewCell {
         
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         subtractButton.addTarget(self, action: #selector(subtractButtonTapped), for: .touchUpInside)
-        //        setupGestureRecognizers()
         
         setupViews()
     }
@@ -214,7 +187,6 @@ class AddToCartViewCell: UITableViewCell {
             
             titleLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 8),
             titleLabel.heightAnchor.constraint(equalToConstant: 80),
-            //            titleLabel.widthAnchor.constraint(equalToConstant: 110),
             
             //CUSTOM VIEWWWW
             customView.topAnchor.constraint(equalTo: self.containerView.topAnchor),
@@ -227,6 +199,7 @@ class AddToCartViewCell: UITableViewCell {
             // SUB BUTTON
             subtractButton.topAnchor.constraint(equalTo: customView.topAnchor, constant: 5),
             subtractButton.centerXAnchor.constraint(equalTo: customView.centerXAnchor),
+            
             // ADD BUTTON
             addButton.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: -5),
             addButton.centerXAnchor.constraint(equalTo: customView.centerXAnchor),
@@ -242,22 +215,19 @@ class AddToCartViewCell: UITableViewCell {
             // pin price label
             priceLabel.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: 0),
             priceLabel.heightAnchor.constraint(equalToConstant: 180),
-            
-            
         ])
     }
     
     func configure(with products: ProductModel) {
+        self.price = products.price ?? 0
         
         titleLabel.text = products.title
         descriptionLabel.text = products.category
-        //                   image.image = products.image
         
         if let url = URL(string: products.image ?? "") {
             image.kf.setImage(with: url)
         }
         priceLabel.text = "$\(products.price ?? 00)"
-        //                   quantityLabel.text = "\(products.count ?? 1)"
         
     }
 }

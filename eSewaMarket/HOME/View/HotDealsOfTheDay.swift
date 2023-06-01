@@ -17,7 +17,8 @@ class HotDealsOfTheDay: UITableViewCell {
     var products: [ProductModel]?
     
     var itemClicked: ((ProductModel) -> ())?
-
+    
+    var addedToCart: ((ProductModel) -> Void)?
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -55,7 +56,7 @@ class HotDealsOfTheDay: UITableViewCell {
     }
     
     func configure(with product: [ProductModel]) {
-        self.products = product.shuffled() 
+        self.products = product.shuffled()
         collectionView.reloadData()
     }
     
@@ -79,28 +80,30 @@ extension HotDealsOfTheDay: UICollectionViewDataSource {
         if let product = products?[indexPath.row] {
             cell.configure(with: product)
         }
-        
+        cell.addedToCart = { [weak self] product in
+            self?.addedToCart?(product)
+        }
         return cell
     }
-
-
-func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let item = products?[indexPath.row]
-    if let item = item {
-        self.itemClicked?(item)
-    }
     
-}
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = products?[indexPath.row]
+        if let item = item {
+            self.itemClicked?(item)
+        }
+        
+    }
 }
 extension HotDealsOfTheDay: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 8
-           let numberOfItemsPerRow: CGFloat = 2
-           let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
-           let itemWidth = availableWidth / numberOfItemsPerRow
-           
-           return CGSize(width: itemWidth, height: 255)
+        let numberOfItemsPerRow: CGFloat = 2
+        let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
+        let itemWidth = availableWidth / numberOfItemsPerRow
+        
+        return CGSize(width: itemWidth, height: 255)
     }
     
 }
@@ -116,6 +119,10 @@ class HotCell: UICollectionViewCell {
     let addButtonView = UIView()
     let addToCart = UIButton()
     
+    var addedToCart: ((ProductModel) -> ())?
+    var product: ProductModel?
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -128,7 +135,7 @@ class HotCell: UICollectionViewCell {
         contentView.addSubview(productPrice)
         contentView.addSubview(addToCart)
         contentView.addSubview(heartButton)
-                
+        
         productImage.translatesAutoresizingMaskIntoConstraints = false
         productImage.contentMode = .scaleAspectFit // set the content mode to maintain aspect ratio
         
@@ -205,10 +212,21 @@ class HotCell: UICollectionViewCell {
             
         ])
         
+        addToCart.addTarget(self, action: #selector(addToCartButton), for: .touchUpInside)
         
     }
     
+    
+    @objc func addToCartButton() {
+        guard let product = product else {
+            return
+        }
+        
+        addedToCart?(product)
+        
+    }
     func configure(with product: ProductModel) {
+        self.product = product
         name.text = product.title
         productPrice.text = "$\(product.price ?? 00)"
         categoryLine.text = product.category
