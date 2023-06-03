@@ -41,8 +41,7 @@ class ProductDetails: UIViewController  {
         tableView.backgroundColor = UIColor(named: "color1")
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.clipsToBounds = true
-        tableView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height - 70)
+        tableView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height - 60)
 
         
         checkOutLabel.text = "Checkout Total"
@@ -71,29 +70,19 @@ class ProductDetails: UIViewController  {
         navigationItem.title = "Product Detail"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]
         
-        
-        
+      
         cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
         cartButton.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
-        
-//        tableView.clipsToBounds = true
-//        tableView.bounds.size.height -= 80
 
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
         footer.translatesAutoresizingMaskIntoConstraints = false
         checkOutLabel.translatesAutoresizingMaskIntoConstraints = false
         checkOutButton.translatesAutoresizingMaskIntoConstraints = false
         checkOutPrice.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-//            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-////            tableView.heightAnchor.constraint(equalToConstant: 500),
-//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
             
             footer.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 0),
             footer.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
