@@ -26,7 +26,6 @@ class FeaturedProducts: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 20
-//        layout.showsHorizontalScrollIndicator = false
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemPink
@@ -97,20 +96,20 @@ extension FeaturedProducts: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let padding: CGFloat = 8
-           let numberOfItemsPerRow: CGFloat = 2
-           let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
-           let itemWidth = availableWidth / numberOfItemsPerRow
-           
-           return CGSize(width: itemWidth, height: 255)
-
+        let numberOfItemsPerRow: CGFloat = 2
+        let availableWidth = collectionView.bounds.width - padding * (numberOfItemsPerRow + 1)
+        let itemWidth = availableWidth / numberOfItemsPerRow
+        
+        return CGSize(width: itemWidth, height: 255)
+        
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let item = products?[indexPath.row]
-            if let item = item {
-                self.itemClicked?(item)
-            }
-    
+        let item = products?[indexPath.row]
+        if let item = item {
+            self.itemClicked?(item)
         }
+        
+    }
 }
 
 class FeaturedCell: UICollectionViewCell {

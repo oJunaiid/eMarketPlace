@@ -9,7 +9,7 @@ import UIKit
 class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProtocol {
     
     var presenter: HomePresenter?
-    var Cpresenter: categoryClass?
+    var categoryPresenter: categoryClass?
     var products = [ProductModel]()
     var categories: [CategorieModel]?
     let tableView = UITableView()
@@ -38,9 +38,9 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         view.backgroundColor = .white
         setupViews()
         presenter = (HomePresenter(delegate: self))
-        Cpresenter = (categoryClass(view: self, delegate: self))
+        categoryPresenter = (categoryClass(view: self, delegate: self))
         presenter?.fetch()
-        Cpresenter?.populateDescriptionView()
+        categoryPresenter?.populateDescriptionView()
         // presenter?.fetchC()
         
         footer.backgroundColor = .lightGray
@@ -91,7 +91,7 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         ])
         
         cartButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        //        heartButton.addTarget(self, action: #selector(productdidTap), for: .touchUpInside)
+    
     }
     
     func didFetchProducts(with products: [ProductModel]) {
@@ -196,17 +196,10 @@ class HomeController: UIViewController, UIScrollViewDelegate, HomePresenterProto
         ])
         
     }
-    
     @objc func didTapButton() {
-//        let vc = AddToCartViewController()
+        addToCartVC.selectedProduct = nil // Reset selected product
         self.navigationController?.pushViewController(addToCartVC, animated: true)
     }
-    
-    //    @objc func productdidTap() {
-    //        let vc = ProductDetails()
-    //        self.navigationController?.pushViewController(vc, animated: true)
-    //    }
-    
 }
 
 extension HomeController: UITableViewDataSource {
@@ -257,26 +250,26 @@ extension HomeController: UITableViewDataSource {
             view.frame = .zero
         }
     }
-        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            switch section {
-            case 0:
-                return 0.0
-            case 1:
-                return UITableView.automaticDimension
-            case 2:
-                return UITableView.automaticDimension
-            case 3:
-                return UITableView.automaticDimension
-            case 4:
-                return 0.0
-            case 5:
-                return UITableView.automaticDimension
-            case 6:
-                return UITableView.automaticDimension
-            default:
-                return  0.0
-                
-            }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0.0
+        case 1:
+            return UITableView.automaticDimension
+        case 2:
+            return UITableView.automaticDimension
+        case 3:
+            return UITableView.automaticDimension
+        case 4:
+            return 0.0
+        case 5:
+            return UITableView.automaticDimension
+        case 6:
+            return UITableView.automaticDimension
+        default:
+            return  0.0
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -383,7 +376,7 @@ extension HomeController: UITableViewDataSource {
             return cell
         }
     }
- 
+    
     
 }
 extension HomeController: UITableViewDelegate {
@@ -392,7 +385,7 @@ extension HomeController: UITableViewDelegate {
             // Do not call super implementation to prevent highlighting
         }
     }
-
+    
 }
 
 extension AdBannerCell: UIScrollViewDelegate {

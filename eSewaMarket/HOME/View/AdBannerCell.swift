@@ -9,8 +9,6 @@ import UIKit
 
 class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
     
-    //    var itemList: [BannerImage]?
-    
     let pageControl = UIPageControl()
     
     private let cellReuseIdentifier = "AdBannerCell"
@@ -64,7 +62,6 @@ class AdBannerCell: UITableViewCell, UICollectionViewDelegate {
             collectionView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
-        // Register cell
         collectionView.register(AdCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
     }
     

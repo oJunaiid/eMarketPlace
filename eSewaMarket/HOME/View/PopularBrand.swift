@@ -153,7 +153,6 @@ class PopularCell: UICollectionViewCell {
         name.font = UIFont.systemFont(ofSize: 14)
         name.numberOfLines = 1
         
-        
         name.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

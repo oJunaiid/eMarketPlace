@@ -15,3 +15,6 @@ end
 pod 'Kingfisher'
 
 pod 'Alamofire'
+
+pod 'ReadMoreTextView'
+

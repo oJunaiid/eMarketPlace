@@ -68,7 +68,6 @@ class AddToCartViewCell: UITableViewCell {
     //
     var priceLabel: UILabel = {
         let priceLabel = UILabel()
-        //        priceLabel.text = ""
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -127,22 +126,19 @@ class AddToCartViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-     var price: Double = 64
-     var count: Int = 1
+    var price: Double = 64
+    var count: Int = 1
+    var totalUpdatedPrice: Double?
+    var priceChanged: ((Double, Int) -> ())?
     
     func updatePriceAndCount() {
         quantityLabel.text = String(format: "%02d", count)
-        
-//
-               let totalPrice = price * Double(count)
-               priceLabel.text = String(format: "$%.2f", totalPrice)
-//           } else {
-//               priceLabel.text = ""
-//           }
-//        let totalPrice = price * Double(count)
-//        priceLabel.text = String(format: "$%.2f", totalPrice)
+        let totalPrice = price * Double(count)
+        priceLabel.text = String(format: "$%.2f", totalPrice)
+        totalUpdatedPrice = totalPrice
+        self.priceChanged?(totalPrice, count)
     }
-
+    
     @objc func addButtonTapped() {
         count += 1
         updatePriceAndCount()
@@ -166,29 +162,23 @@ class AddToCartViewCell: UITableViewCell {
     
     private func setupViews() {
         
-        // pin image view
+        
         NSLayoutConstraint.activate([
-            
-            
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             containerView.heightAnchor.constraint(equalToConstant: 180),
-            
-            
+              
             image.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 12),
             image.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 12),
             image.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -12),
             image.widthAnchor.constraint(equalToConstant: 100),
             image.heightAnchor.constraint(equalToConstant: 100),
             
-            // pin title label
-            
             titleLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 8),
             titleLabel.heightAnchor.constraint(equalToConstant: 80),
             
-            //CUSTOM VIEWWWW
             customView.topAnchor.constraint(equalTo: self.containerView.topAnchor),
             customView.leadingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -38),
             customView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor),
@@ -196,29 +186,25 @@ class AddToCartViewCell: UITableViewCell {
             
             titleLabel.trailingAnchor.constraint(equalTo: customView.leadingAnchor, constant: -5),
             
-            // SUB BUTTON
             subtractButton.topAnchor.constraint(equalTo: customView.topAnchor, constant: 5),
             subtractButton.centerXAnchor.constraint(equalTo: customView.centerXAnchor),
             
-            // ADD BUTTON
             addButton.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: -5),
             addButton.centerXAnchor.constraint(equalTo: customView.centerXAnchor),
             
-            //Counter label
             quantityLabel.centerYAnchor.constraint(equalTo: customView.centerYAnchor),
             quantityLabel.centerXAnchor.constraint(equalTo: customView.centerXAnchor),
             
-            // pin subtitle label
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 1),
             descriptionLabel.heightAnchor.constraint(equalToConstant: 120),
             
-            // pin price label
             priceLabel.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: 0),
             priceLabel.heightAnchor.constraint(equalToConstant: 180),
         ])
     }
     
     func configure(with products: ProductModel) {
+        self.count = products.count
         self.price = products.price ?? 0
         
         titleLabel.text = products.title
@@ -227,7 +213,7 @@ class AddToCartViewCell: UITableViewCell {
         if let url = URL(string: products.image ?? "") {
             image.kf.setImage(with: url)
         }
-        priceLabel.text = "$\(products.price ?? 00)"
-        
+        quantityLabel.text = String(format: "%02d", products.count)
+        priceLabel.text = "$\(products.updatedPrice ?? 0)"
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class AddToCartViewController: UIViewController {
-        
+    
     var cartItems = [ProductModel]()
     
     var selectedProduct: ProductModel?
@@ -59,16 +59,16 @@ class AddToCartViewController: UIViewController {
         tableView.allowsSelection = false
         navigationItem.title = "My Cart"
         
-        // Create a back button
+      
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.tintColor = .black
-        // Add the back button to the navigation item
+      
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
-        // Add the navigation item to the navigation bar
+      
         let cartButton = UIButton(type: .system)
         cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
         cartButton.addTarget(self, action: #selector(cartTap), for: .touchUpInside)
@@ -76,32 +76,31 @@ class AddToCartViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         
-        // add tableview to view
+        
         view.addSubview(tableView)
         view.addSubview(footerView)
         view.addSubview(checkoutLabel)
         view.addSubview(checkoutButton)
-//        view.addSubview(checkoutPrice)
+        //        view.addSubview(checkoutPrice)
         footerView.addSubview(checkoutPrice)
         
         
         tableView.delegate = self
         tableView .dataSource = self
         
-    
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         footerView.translatesAutoresizingMaskIntoConstraints = false
         checkoutLabel.translatesAutoresizingMaskIntoConstraints = false
         checkoutButton.translatesAutoresizingMaskIntoConstraints = false
         checkoutPrice.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
-                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-                tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),            
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-                           ])
+        ])
         
         NSLayoutConstraint.activate([
             footerView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
@@ -126,10 +125,10 @@ class AddToCartViewController: UIViewController {
             checkoutButton.heightAnchor.constraint(equalToConstant: 40),
             checkoutButton.widthAnchor.constraint(equalToConstant: 140),
         ])
-      
+        
         
         displayTotalPrice()
-       
+        
     }
     
     func calculateTotalPrice() -> Double {
@@ -150,8 +149,17 @@ class AddToCartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if let prod = self.selectedProduct {
-            cartItems.append(prod)
+            if let existingItemIndex = cartItems.firstIndex(where: { $0.title == prod.title }) {
+                cartItems[existingItemIndex].count += 1 // Increase the count for the existing item
+            } else {
+                cartItems.append(prod) // Append the item if it doesn't exist in cartItems
+            }
+            
+            
+            self.selectedProduct = nil // Reset selected product after adding it to cartItems
+            
         }
         self.tableView.reloadData()
     }
@@ -165,17 +173,12 @@ class AddToCartViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        tableView.frame = view.bounds
+        //        tableView.frame = view.bounds
         tableView.backgroundColor = UIColor(named: "color1")
         tableView.separatorStyle = .none
         
         
     }
-    //
-    //    func displayItemList(model: [AddCartModel]) {
-    //        items = model
-    //        tableView.reloadData()
-    //    }
 }
 
 extension AddToCartViewController: UITableViewDelegate {
@@ -228,7 +231,11 @@ extension AddToCartViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: AddToCartViewCell.identifier, for: indexPath) as! AddToCartViewCell
         
         cell.configure(with: cartItems[indexPath.row])
-        
+        cell.priceChanged = { [weak self] (newPrice, count) in
+            guard let self = self else {return}
+            self.cartItems[indexPath.row].updatedPrice = newPrice
+            self.cartItems[indexPath.row].count = count
+        }
         return cell
     }
     
